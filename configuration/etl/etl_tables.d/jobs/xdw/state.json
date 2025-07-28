@@ -1,0 +1,53 @@
+{
+  "table_definition": {
+    "name": "states",
+    "comment": "The various states of NAIRR Pilot Organizations.",
+    "engine": "InnoDB",
+    "charset": "utf8",
+    "columns": [
+      {
+        "name": "state_id",
+        "type": "int(11)",
+        "nullable": false,
+        "extra": "auto_increment",
+        "comment": "The id of the record."
+      },
+      {
+        "name": "abbrev",
+        "type": "varchar(2)",
+        "comment": "Abbreviated name.",
+        "nullable": true
+      },
+      {
+        "name": "name",
+        "type": "varchar(100)",
+        "comment": "Long name for this state.",
+        "nullable": true
+      },
+      {
+        "name": "country_id",
+        "type": "int(11)",
+        "comment": "The country this state belongs to.",
+        "nullable": false
+      },
+      {
+        "name": "epscor",
+        "type": "boolean",
+        "comment": "Is this state an EPSCoR state?",
+        "nullable": true
+      }
+    ],
+    "indexes": [
+      {
+        "name": "PRIMARY",
+        "columns": ["state_id"],
+        "is_unique": true
+      },
+      {
+        "name": "fk_country_id",
+        "columns": ["country_id"]
+      }
+    ],
+    "triggers": []
+  }
+}

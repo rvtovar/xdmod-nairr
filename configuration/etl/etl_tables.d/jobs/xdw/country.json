@@ -1,0 +1,36 @@
+{
+  "table_definition": {
+    "name": "countries",
+    "comment": "The various countries of NAIRR Pilot Organizations.",
+    "engine": "InnoDB",
+    "charset": "utf8",
+    "columns": [
+      {
+        "name": "country_id",
+        "type": "int(11)",
+        "nullable": false,
+        "extra": "auto_increment",
+        "comment": "The id of the record."
+      },
+      {
+        "name": "name",
+        "type": "varchar(100)",
+        "comment": "Long name for this country.",
+        "nullable": true
+      },
+      {
+        "name": "nsf_code",
+        "type": "varchar(10)",
+        "comment": "NSF code for this country.",
+        "nullable": true
+      }
+    ],
+    "indexes": [
+      {
+        "name": "PRIMARY",
+        "columns": ["country_id"],
+        "is_unique": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "table_definition": [
+    {
+      "$ref": "${table_definition_dir}/jobs/xdw/country.json#/table_definition"
+    }
+  ],
+  "source_query": {
+    "records": {
+      "country_id": "c.country_id",
+      "name": "c.country_name",
+      "nsf_code": "c.nsf_code"
+    },
+    "joins": [
+      {
+        "name": "countries",
+        "schema": "people",
+        "alias": "c"
+      }
+    ],
+    "where": []
+  }
+}

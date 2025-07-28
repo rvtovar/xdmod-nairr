@@ -1,0 +1,27 @@
+{
+  "table_definition": {
+    "$ref": "${table_definition_dir}/jobs/xdw/organization.json#/table_definition"
+  },
+  "source_query": {
+    "records": {
+      "id": "o.organization_id",
+      "abbrev": "o.organization_abbrev",
+      "name": "o.organization_name",
+      "short_name": "COALESCE(o.organization_abbrev, o.organization_name)",
+      "long_name": "CASE WHEN organization_abbrev IS NULL THEN organization_name ELSE organization_abbrev || ' - ' || organization_name END",
+      "order_id": "NULL",
+      "organization_origin_id": "o.organization_id",
+      "state_id": "o.state_id",
+      "country_id": "o.country_id",
+      "organizationtype_id": "o.org_type_id",
+      "carnegie_id": "o.carnegie_id"
+    },
+    "joins": [
+      {
+        "name": "organizations",
+        "schema": "${SOURCE_SCHEMA}",
+        "alias": "o"
+      }
+    ]
+  }
+}

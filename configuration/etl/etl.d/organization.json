@@ -1,0 +1,83 @@
+{
+  "module": "nairr",
+  "defaults": {
+    "global": {
+      "truncate_destination": false,
+      "namespace": "ETL\\Ingestor",
+      "class": "DatabaseIngestor",
+      "options_class": "IngestorOptions",
+      "load_data_infile_character_set": "utf8",
+      "enabled": true,
+      "endpoints": {
+        "source": {
+          "type": "postgres",
+          "name": "XDCDB organization",
+          "config": "tgcdbmirror",
+          "schema": "organizations"
+        },
+        "people": {
+          "type": "postgres",
+          "name": "XDCDB people",
+          "config": "tgcdbmirror",
+          "schema": "people"
+        },
+        "acct": {
+          "type": "postgres",
+          "name": "XDCDB acct",
+          "config": "tgcdbmirror",
+          "schema": "acct"
+        },
+        "destination": {
+          "type": "mysql",
+          "name": "XDMoD Jobs",
+          "config": "datawarehouse",
+          "schema": "modw",
+          "create_schema_if_not_exists": true
+        }
+      }
+    }
+  },
+  "organization-bootstrap": [
+    {
+      "name": "create-tables",
+      "description": "Create tables",
+      "namespace": "ETL\\Maintenance",
+      "class": "ManageTables",
+      "options_class": "MaintenanceOptions",
+      "definition_file_list": [
+        "jobs/xdw/organization.json",
+        "jobs/xdw/organization_type.json",
+        "jobs/xdw/state.json",
+        "jobs/xdw/country.json",
+        "jobs/xdw/carnegie_classification.json"
+      ]
+    }
+  ],
+  "ingest-organizations": [
+    {
+      "name": "modwIngestCountries",
+      "description": "Ingestor for the country dimension",
+      "definition_file": "jobs/xdw/country.json"
+    },
+    {
+      "name": "modwIngestStates",
+      "description": "Ingestor for the state dimension",
+      "definition_file": "jobs/xdw/state.json"
+    },
+    {
+      "name": "modwIngestCarnegieClassifications",
+      "description": "Ingestor for the carnegie classification dimension",
+      "definition_file": "jobs/xdw/carnegie_classification.json"
+    },
+    {
+      "name": "modwIngestOrganizationTypes",
+      "description": "Ingestor for the organization type dimension",
+      "definition_file": "jobs/xdw/organization_type.json"
+    },
+    {
+      "name": "modwIngestOrganizations",
+      "description": "Ingestor for the organization dimension",
+      "definition_file": "jobs/xdw/organization.json"
+    }
+  ]
+}

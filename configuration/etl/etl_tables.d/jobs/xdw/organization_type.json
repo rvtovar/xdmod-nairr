@@ -1,0 +1,37 @@
+{
+  "table_definition": {
+    "name": "organization_type",
+    "comments": "Organization Type",
+    "engine": "InnoDB",
+    "charset": "utf8",
+    "columns": [
+      {
+        "name": "org_type_id",
+        "type": "int(11)",
+        "nullable": false,
+        "extra": "auto_increment",
+        "comment": "The id of the record."
+      },
+      {
+        "name": "org_type",
+        "type": "varchar(100)",
+        "comment": "The type of organization.",
+        "nullable": false
+      },
+      {
+        "name": "nsf_org_type_code",
+        "type": "varchar(500)",
+        "comment": "NSF code for this organization type.",
+        "nullable": true
+      }
+    ],
+    "indexes": [
+      {
+        "name": "PRIMARY",
+        "columns": ["org_type_id"],
+        "is_unique": true
+      }
+    ],
+    "triggers": []
+  }
+}

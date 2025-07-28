@@ -1,0 +1,23 @@
+{
+  "table_definition": [
+    {
+      "$ref": "${table_definition_dir}/jobs/xdw/carnegie_classification.json#/table_definition"
+    }
+  ],
+  "source_query": {
+    "records": {
+      "carnegie_classification_id": "cc.classification_id",
+      "name": "cc.classification",
+      "display": "cc.display_classification",
+      "relative_order": "cc.relative_order"
+    },
+    "joins": [
+      {
+        "name": "carnegie_classifications",
+        "schema": "${SOURCE_SCHEMA}",
+        "alias": "cc"
+      }
+    ],
+    "where": []
+  }
+}

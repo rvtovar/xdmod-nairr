@@ -1,0 +1,22 @@
+{
+  "table_definition": [
+    {
+      "$ref": "${table_definition_dir}/jobs/xdw/organization_type.json#/table_definition"
+    }
+  ],
+  "source_query": {
+    "records": {
+      "org_type_id": "o.org_type_id",
+      "org_type": "o.org_type",
+      "nsf_org_type_code": "o.nsf_org_type_code"
+    },
+    "joins": [
+      {
+        "name": "organization_types",
+        "schema": "${SOURCE_SCHEMA}",
+        "alias": "o"
+      }
+    ],
+    "where": []
+  }
+}

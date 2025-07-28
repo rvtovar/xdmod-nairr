@@ -1,0 +1,47 @@
+{
+  "table_definition": {
+    "name": "carnegie_classifications",
+    "engine": "InnoDB",
+    "charset": "utf8",
+    "collation": "utf8_unicode_ci",
+    "columns": [
+      {
+        "name": "carnegie_classification_id",
+        "type": "int(11)",
+        "nullable": false,
+        "extra": "auto_increment"
+      },
+      {
+        "name": "name",
+        "type": "varchar(128)",
+        "nullable": false
+      },
+      {
+        "name": "display",
+        "type": "varchar(128)",
+        "nullable": false
+      },
+      {
+        "name": "relative_order",
+        "type": "int(11)",
+        "nullable": false
+      }
+    ],
+    "indexes": [
+      {
+        "name": "PRIMARY",
+        "columns": ["carnegie_classification_id"]
+      },
+      {
+        "name": "idx_cp_name",
+        "columns": ["name"],
+        "is_unique": true
+      },
+      {
+        "name": "idx_display",
+        "columns": ["display"],
+        "is_unique": true
+      }
+    ]
+  }
+}

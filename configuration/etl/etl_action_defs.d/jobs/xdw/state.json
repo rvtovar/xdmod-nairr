@@ -1,0 +1,24 @@
+{
+  "table_definition": [
+    {
+      "$ref": "${table_definition_dir}/jobs/xdw/state.json#/table_definition"
+    }
+  ],
+  "source_query": {
+    "records": {
+      "state_id": "s.state_id",
+      "abbrev": "s.state_abbrev",
+      "name": "s.state_name",
+      "country_id": "s.country_id",
+      "epscor": "s.epscor"
+    },
+    "joins": [
+      {
+        "name": "states",
+        "schema": "people",
+        "alias": "s"
+      }
+    ],
+    "where": []
+  }
+}
