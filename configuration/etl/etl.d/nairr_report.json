@@ -1,0 +1,25 @@
+{
+  "module": "nairr",
+  "defaults": {
+    "global": {
+      "endpoints": {
+        "destination": {
+          "type": "mysql",
+          "name": "Job Record/Task database",
+          "config": "datawarehouse",
+          "schema": "modw"
+        }
+      }
+    }
+  },
+  "nairr-report-bootstrap": [
+    {
+      "name": "create-table",
+      "description": "Create table",
+      "namespace": "ETL\\Maintenance",
+      "class": "ManageTables",
+      "options_class": "MaintenanceOptions",
+      "definition_file_list": ["nairr/nairr_report.json"]
+    }
+  ]
+}
