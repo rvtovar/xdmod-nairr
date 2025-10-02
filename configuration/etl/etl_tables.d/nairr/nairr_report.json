@@ -1,0 +1,41 @@
+{
+  "table_definition": {
+    "name": "nairr_report_access",
+    "description": "NAIRR Report Access Table",
+    "engine": "InnoDB",
+    "charset": "utf8",
+    "collation": "utf8_general_ci",
+    "columns": [
+      {
+        "name": "id",
+        "type": "int(11)",
+        "nullable": false,
+        "extra": "auto_increment",
+        "comment": "Primary key"
+      },
+      {
+        "name": "nairr_report_id",
+        "type": "varchar(64)",
+        "nullable": false,
+        "comment": "NAIRR Report Identifier"
+      },
+      {
+        "name": "user_email",
+        "type": "varchar(255)",
+        "nullable": false,
+        "comment": "Email of the user accessing the report"
+      }
+    ],
+    "indexes": [
+      {
+        "name": "PRIMARY",
+        "columns": ["id"]
+      },
+      {
+        "name": "report_email_pk",
+        "columns": ["nairr_report_id", "user_email"],
+        "is_unique": true
+      }
+    ]
+  }
+}

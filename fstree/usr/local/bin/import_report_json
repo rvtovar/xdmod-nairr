@@ -1,0 +1,162 @@
+#!/usr/bin/env php
+<?php
+
+/**
+ * Import report viewers from a JSON file.
+ *
+ * Usage: ./import-json-reports -i input.json
+ */
+
+
+require_once __DIR__ . '/../configuration/linker.php';
+
+use CCR\DB;
+use CCR\Log;
+
+ini_set('memory_limit', -1);
+
+try {
+    main();
+} catch (Exception $e) {
+    do {
+        fwrite(STDERR, $e->getMessage() . "\n");
+        fwrite(STDERR, $e->getTraceAsString() . "\n");
+    } while ($e = $e->getPrevious());
+    exit(1);
+}
+
+function displayHelpText()
+{
+    echo <<<EOF
+Usage: import-json-reports -i input.json
+
+    -h, --help
+        Display this message and exit.
+
+    -i, --input
+        The input JSON file, formatted as:
+        {
+            "report_name_1": { "viewers": [ ... ] },
+            "report_name_2": { "viewers": [ ... ] }
+        }
+
+EOF;
+}
+
+function main()
+{
+    global $db, $logger;
+    $logLevel = -1;
+    if ($logLevel === -1) {
+        $logLevel = Log::NOTICE;
+    }
+    $opts = [
+        ['h',  'help'],
+        ['i:', 'input:'],
+    ];
+
+    $shortOptions = implode('', array_map(fn ($opt) => $opt[0], $opts));
+    $longOptions  = array_map(fn ($opt) => $opt[1], $opts);
+
+    $args = getopt($shortOptions, $longOptions);
+    $conf = array(
+        'file'            => false,
+        'mail'            => false,
+        'consoleLogLevel' => $logLevel,
+    );
+
+    $logger = Log::factory('xdmod-import-csv', $conf);
+    $logger->notice(array(
+      "message" => "Starting import-json-reports",
+      "process_start_time" => date('Y-m-d H:i:s'),
+    ));
+
+    $logger->debug("Checking for required arguments");
+    if ($args === false) {
+        $logger->crit("Failed to parse command line arguments");
+        exit(1);
+    }
+
+    if (isset($args['h']) || isset($args['help'])) {
+        displayHelpText();
+        exit(0);
+    }
+
+    $input = $args['i'] ?? $args['input'] ?? null;
+    if ($input === null) {
+        $logger->crit("Input file is required");
+        displayHelpText();
+        exit(1);
+    }
+    if (!is_file($input) || !is_readable($input)) {
+        $logger->crit("Input file '$input' does not exist or is not readable");
+        exit(1);
+    }
+
+    $json = file_get_contents($input);
+    $data = json_decode($json, true);
+
+    if ($data === null) {
+        fwrite(STDERR, "Failed to parse JSON in '$input'\n");
+        exit(1);
+    }
+
+    try {
+        $logger->debug('Creating database connections');
+        $db = DB::factory('datawarehouse');
+    } catch (Exception $e) {
+        $msg = 'Failed to create database connection: ' . $e->getMessage();
+        $logger->crit(array(
+            'message'   => $msg,
+            'stacktrace' => $e->getTraceAsString(),
+        ));
+        exit(1);
+    }
+    $logger->info('Starting database transaction');
+    $db->beginTransaction();
+
+    try {
+        importJsonReports($data);
+        $logger->info('Committing database transaction');
+        $db->commit();
+    } catch (Exception $e) {
+        $msg = 'Failed to import JSON reports: ' . $e->getMessage();
+        $logger->error(array(
+            'message'   => $msg,
+            'stacktrace' => $e->getTraceAsString(),
+        ));
+        $logger->info('Rolling back database transaction');
+        $db->rollBack();
+    }
+
+    $logger->notice(array(
+        "message" => "Finished import-json-reports",
+        "process_end_time" => date('Y-m-d H:i:s'),
+    ));
+
+    exit(0);
+
+}
+
+function importJsonReports(array $reports)
+{
+    // Example database connection using PDO (adjust as needed)
+    global $db, $logger;
+    $logger->debug("Importing JSON reports");
+    $sql = "
+      INSERT IGNORE INTO 
+        modw.nairr_report_access (nairr_report_id, user_email)
+      VALUES (:report_name, :viewer)
+    ";
+    foreach ($reports as $reportName => $reportData) {
+        $viewers = $reportData['viewers'] ?? [];
+        foreach ($viewers as $viewer) {
+            $db->execute($sql, [
+                ':report_name' => $reportName,
+                ':viewer' => $viewer,
+            ]);
+
+        }
+        // Insert your SQL/database logic here as needed
+    }
+}
