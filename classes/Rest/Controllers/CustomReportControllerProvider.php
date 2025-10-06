@@ -121,7 +121,7 @@ class CustomReportControllerProvider extends BaseControllerProvider
 	 * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
 	 * @throws NotFoundHttpException if no report exists with the given ID.
 	 */
-	public function getReport(Request $request, Application $app, $report_id)
+	public function getReport(Request $request, Application $app, string $report_id)
 	{
 
 		$user = $this->authorize($request, array("acl.nairr-reports"));
@@ -211,7 +211,7 @@ class CustomReportControllerProvider extends BaseControllerProvider
 	 * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
 	 * @throws NotFoundHttpException if no report exists with the given ID.
 	 */
-	public function getReportThumbnail(Request $request, Application $app, $report_id)
+	public function getReportThumbnail(Request $request, Application $app, string $report_id)
 	{
 		$user = $this->authorize($request, array("acl.nairr-reports"));
 		list($base_path, $report_config) = $this->getConfiguration(
@@ -231,7 +231,7 @@ class CustomReportControllerProvider extends BaseControllerProvider
 	 *
 	 */
 
-	private function isViewable($report_id, $user_id)
+	private function isViewable(string $report_id, int $user_id)
 	{
 		$sql = "
 		SELECT
@@ -251,7 +251,7 @@ class CustomReportControllerProvider extends BaseControllerProvider
 		";
 
 		$isViewable = $this->db->query($sql, array(
-			'report_id' => $report_id,
+			'report_id' => strtolower($report_id),
 			'user_id' => $user_id
 		));
 

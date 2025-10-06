@@ -174,11 +174,6 @@ Ext.extend(XDMoD.Module.NairrReports, XDMoD.PortalModule, {
       `,
       updateReports: function (records) {
         this.removeAll(true);
-        if (!records.length) {
-          this.body.update(this.emptyText);
-          this.doLayout();
-          return;
-        }
         this.body.update("");
         Ext.each(records, function (record) {
           const report = record.data;
@@ -236,7 +231,7 @@ Ext.extend(XDMoD.Module.NairrReports, XDMoD.PortalModule, {
 
     reportContainer.on("afterrender", function () {
       reportStore.on("load", function (store, records, success) {
-        reportContainer.updateReports(records);
+        reportContainer.body.unmask();
         let hashParams = getHashParams();
         if (!success) {
           console.error("Failed to load reports.");
@@ -248,6 +243,13 @@ Ext.extend(XDMoD.Module.NairrReports, XDMoD.PortalModule, {
             `);
           return;
         }
+
+        if (!records || records.length === 0) {
+          reportContainer.body.update(reportContainer.emptyText);
+          return;
+        }
+
+        reportContainer.updateReports(records);
 
         if (pendingReportId) {
           const matching = records.find((r) => r.data.name === pendingReportId);
