@@ -124,6 +124,8 @@ Ext.extend(XDMoD.Module.NairrReports, XDMoD.PortalModule, {
           );
           if (params.report_id) {
             triggerReportDownload(params.report_id, params.year, params.month);
+            delete params.report_id;
+            setHashParams(params);
           }
         }
       });
@@ -230,6 +232,7 @@ Ext.extend(XDMoD.Module.NairrReports, XDMoD.PortalModule, {
     });
 
     reportContainer.on("afterrender", function () {
+      reportContainer.body.mask("Loading...");
       reportStore.on("load", function (store, records, success) {
         reportContainer.body.unmask();
         let hashParams = getHashParams();
