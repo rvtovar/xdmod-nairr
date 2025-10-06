@@ -81,7 +81,7 @@ class CustomReportControllerProvider extends BaseControllerProvider
 	public function getReports(Request $request, Application $app)
 	{
 		$user = $this->authorize($request, array("acl.nairr-reports"));
-		$user_email = $user->getEmailAddress();
+		$user_id = $user->getUserID();
 		list($_, $report_config) = $this->getConfiguration(
 			$request->get('month', null),
 			$request->get('year', null)
@@ -92,8 +92,7 @@ class CustomReportControllerProvider extends BaseControllerProvider
 
 		foreach ($report_config as $report_id => $report_meta) {
 
-			$is_viewable = $this->isViewable($report_id, $user_email);
-
+			$is_viewable = $this->isViewable($report_id, $user_id);
 			if (!$is_viewable) {
 				continue;
 			}
@@ -133,8 +132,8 @@ class CustomReportControllerProvider extends BaseControllerProvider
 			$request->get('year', null)
 		);
 
-		$user_email = $user->getEmailAddress();
-		$is_viewable = $this->isViewable($report_id, $user_email);
+		$user_id = $user->getUserID();
+		$is_viewable = $this->isViewable($report_id, $user_id);
 		if (!$is_viewable) {
 			throw new NotFoundHttpException('You do not have permission to view this report');
 		}
@@ -232,19 +231,19 @@ class CustomReportControllerProvider extends BaseControllerProvider
 	 *
 	 */
 
-	private function isViewable($report_id, $user_email)
+	private function isViewable($report_id, $user_id)
 	{
 		$sql = "
 		SELECT
 			CASE
 		WHEN EXISTS (
 			SELECT 1
-			FROM modw.nairr_report_access
-			WHERE nairr_report_id = SUBSTRING_INDEX(:report_id, '_v',1) AND user_email = :user_email
+			FROM moddb.nairr_report_access
+			WHERE nairr_report_id = SUBSTRING_INDEX(:report_id, '_v',1) AND user_id = :user_id
 		) THEN TRUE
 		WHEN NOT EXISTS (
 			SELECT 1
-			FROM modw.nairr_report_access
+			FROM moddb.nairr_report_access
 			WHERE nairr_report_id = SUBSTRING_INDEX(:report_id, '_v', 1)
 		) THEN TRUE
 		ELSE FALSE
@@ -253,7 +252,7 @@ class CustomReportControllerProvider extends BaseControllerProvider
 
 		$isViewable = $this->db->query($sql, array(
 			'report_id' => $report_id,
-			'user_email' => $user_email
+			'user_id' => $user_id
 		));
 
 		return (bool) $isViewable[0]['is_viewable'];
