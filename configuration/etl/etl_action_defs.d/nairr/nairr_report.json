@@ -1,0 +1,24 @@
+{
+  "table_definition": {
+    "$ref": "${table_definition_dir}/nairr/nairr_report.json#/table_definition"
+  },
+  "source_query": {
+    "records": {
+      "nairr_report_id": "nras.nairr_report_id",
+      "user_id": "u.id"
+    },
+    "joins": [
+      {
+        "schema": "${SOURCE_SCHEMA}",
+        "name": "nairr_report_access_staging",
+        "alias": "nras"
+      },
+      {
+        "schema": "${DESTINATION_SCHEMA}",
+        "name": "Users",
+        "alias": "u",
+        "on": "u.email_address = nras.user_email"
+      }
+    ]
+  }
+}

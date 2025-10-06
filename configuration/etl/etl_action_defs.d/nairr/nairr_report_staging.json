@@ -1,0 +1,11 @@
+{
+  "table_definition": {
+    "$ref": "${table_definition_dir}/nairr/nairr_report_staging.json"
+  },
+  "destination_record_map": {
+    "nairr_report_access_staging": {
+      "nairr_report_id": "nairr_report_id",
+      "user_email": "user_email"
+    }
+  }
+}
