@@ -21,7 +21,7 @@
         "name": "user_id",
         "type": "int(11)",
         "nullable": false,
-        "comment": "Email of the user accessing the report"
+        "comment": "User ID of the user accessing the report"
       }
     ],
     "indexes": [
