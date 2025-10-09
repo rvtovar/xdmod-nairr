@@ -10,7 +10,7 @@
     "joins": [
       {
         "schema": "${SOURCE_SCHEMA}",
-        "name": "nairr_report_access_staging",
+        "name": "nairr_report_viewers_staging",
         "alias": "nras"
       },
       {

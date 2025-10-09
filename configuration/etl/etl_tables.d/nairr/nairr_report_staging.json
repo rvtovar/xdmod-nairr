@@ -1,6 +1,6 @@
 {
   "table_definition": {
-    "name": "nairr_report_access_staging",
+    "name": "nairr_report_viewers_staging",
     "engine": "InnoDB",
     "charset": "utf8",
     "collation": "utf8_general_ci",

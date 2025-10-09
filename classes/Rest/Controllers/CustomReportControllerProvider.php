@@ -238,12 +238,12 @@ class CustomReportControllerProvider extends BaseControllerProvider
 			CASE
 		WHEN EXISTS (
 			SELECT 1
-			FROM moddb.nairr_report_access
+			FROM moddb.NairrReportViewers
 			WHERE nairr_report_id = SUBSTRING_INDEX(:report_id, '_v',1) AND user_id = :user_id
 		) THEN TRUE
 		WHEN NOT EXISTS (
 			SELECT 1
-			FROM moddb.nairr_report_access
+			FROM moddb.NairrReportViewers
 			WHERE nairr_report_id = SUBSTRING_INDEX(:report_id, '_v', 1)
 		) THEN TRUE
 		ELSE FALSE
