@@ -1,0 +1,29 @@
+{
+  "table_definition": {
+    "name": "nairr_report_viewers_staging",
+    "engine": "InnoDB",
+    "charset": "utf8",
+    "collation": "utf8_unicode_ci",
+    "columns": [
+      {
+        "name": "nairr_report_id",
+        "type": "varchar(64)",
+        "nullable": false,
+        "comment": "NAIRR Report Identifier"
+      },
+      {
+        "name": "user_email",
+        "type": "varchar(255)",
+        "nullable": false,
+        "comment": "Email of the user accessing the report"
+      }
+    ],
+    "indexes": [
+      {
+        "name": "report_email_pk",
+        "columns": ["nairr_report_id", "user_email"],
+        "is_unique": true
+      }
+    ]
+  }
+}

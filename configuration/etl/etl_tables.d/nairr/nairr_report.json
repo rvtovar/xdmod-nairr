@@ -1,0 +1,39 @@
+{
+  "table_definition": {
+    "name": "NairrReportViewers",
+    "engine": "InnoDB",
+    "charset": "utf8",
+    "collation": "utf8_unicode_ci",
+    "columns": [
+      {
+        "name": "nairr_report_access_id",
+        "type": "int(11)",
+        "nullable": false,
+        "extra": "auto_increment"
+      },
+      {
+        "name": "nairr_report_id",
+        "type": "varchar(64)",
+        "nullable": false,
+        "comment": "NAIRR Report Identifier"
+      },
+      {
+        "name": "user_id",
+        "type": "int(11)",
+        "nullable": false,
+        "comment": "User ID of the user accessing the report"
+      }
+    ],
+    "indexes": [
+      {
+        "name": "PRIMARY",
+        "columns": ["nairr_report_access_id"]
+      },
+      {
+        "name": "report_email_pk",
+        "columns": ["nairr_report_id", "user_id"],
+        "is_unique": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "module": "nairr",
+  "defaults": {
+    "global": {
+      "truncate_destination": false,
+      "namespace": "ETL\\Ingestor",
+      "class": "DatabaseIngestor",
+      "options_class": "IngestorOptions",
+      "load_data_infile_character_set": "utf8",
+      "enabled": true,
+      "endpoints": {
+        "source": {
+          "type": "mysql",
+          "name": "Shredder/Staging Database",
+          "config": "database",
+          "schema": "mod_shredder"
+        },
+        "destination": {
+          "type": "mysql",
+          "name": "Shredder/Staging Database",
+          "config": "database",
+          "schema": "mod_shredder"
+        }
+      }
+    }
+  },
+  "nairr-report-bootstrap": [
+    {
+      "name": "create-staging-table",
+      "description": "Create table",
+      "namespace": "ETL\\Maintenance",
+      "class": "ManageTables",
+      "options_class": "MaintenanceOptions",
+      "definition_file_list": ["nairr/nairr_report_staging.json"]
+    },
+    {
+      "name": "create-table",
+      "description": "Create table",
+      "namespace": "ETL\\Maintenance",
+      "class": "ManageTables",
+      "options_class": "MaintenanceOptions",
+      "endpoints": {
+        "destination": {
+          "type": "mysql",
+          "name": "MODDB",
+          "config": "database",
+          "schema": "moddb"
+        }
+      },
+      "definition_file_list": ["nairr/nairr_report.json"]
+    }
+  ],
+  "ingest-nairr-report-access": [
+    {
+      "name": "nairr-report-access-config",
+      "description": "Ingest NAIRR Report Access Config",
+      "class": "StructuredFileIngestor",
+      "definition_file": "nairr/nairr_report_staging.json",
+      "truncate_destination": true,
+      "endpoints": {
+        "source": {
+          "type": "jsonfile",
+          "name": "NAIRR Report Access Config File",
+          "path": "${base_dir}/../nairr_report_viewers.json",
+          "record_schema_path": "nairr/nairr_report_schema.json",
+          "filters": [
+            {
+              "#": "Flatten NAIRR report access JSON into records",
+              "type": "external",
+              "name": "jq",
+              "path": "jq",
+              "arguments": "-c '[to_entries | map({nairr_report_id: .key, viewers: .value.viewers}) | map(.viewers[] as $email | {nairr_report_id, user_email: $email}) | .[]]'"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "nairr-report-access-ingest",
+      "description": "Ingest NAIRR Report Access",
+      "definition_file": "nairr/nairr_report.json",
+      "endpoints": {
+        "destination": {
+          "type": "mysql",
+          "name": "MODDB",
+          "config": "database",
+          "schema": "moddb"
+        }
+      }
+    }
+  ]
+}
