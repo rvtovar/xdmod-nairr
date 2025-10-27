@@ -6,6 +6,11 @@
 @description: This script will take a mapping csv file and take the orcid
 and update the username to corresponding access username in the User table in moddb.
 
+Usage:
+    python3 access_updates.py /path/to/mapping_file.csv
+
+The mapping file should be a CSV with two columns: orcid, access_username
+
 """
 
 import configparser
@@ -30,7 +35,7 @@ def load_mapping_file(file):
 def update_usernames(cur, mapping):
     for orcid, access_username in mapping.items():
         update_query = """
-        UPDATE moddb.User
+        UPDATE moddb.Users
         SET username = %s
         WHERE username = %s;
         """
