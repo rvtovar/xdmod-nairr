@@ -1,71 +1,79 @@
 {
-    "table_definition": [
-        {
-            "$ref": "${table_definition_dir}/resource_actions/resource_actions_staging.json#/table_definition"
-        }
-    ],
-    "source_query": {
-        "records": {
-            "action_resource_id": "ares.action_resource_id",
-            "day_id": "CASE WHEN ares.RESOURCE_AMOUNT_TYPE_ID = 1 THEN (EXTRACT(year FROM (ac.entry_date AT TIME ZONE '${TIMEZONE}')::timestamp) * 100000 + EXTRACT(doy FROM (ac.entry_date AT TIME ZONE '${TIMEZONE}')::timestamp)) ELSE (EXTRACT(year FROM (ac.date_resolved AT TIME ZONE '${TIMEZONE}')::timestamp) * 100000 + EXTRACT(doy FROM (ac.date_resolved AT TIME ZONE '${TIMEZONE}')::timestamp)) END",
-            "opportunity_id": "o.opportunity_id",
-            "allocation_type_id": "o.allocation_type_id",
-            "request_master_id": "r.request_master_id",
-            "request_id": "r.request_id",
-            "request_type_id": "r.request_type_id",
-            "request_entry_date": "(r.entry_date AT TIME ZONE '${TIMEZONE}')::timestamp",
-            "pi_xras_person_id": "(SELECT COALESCE(rpr.person_id, -1) AS \"pi_xras_person_id\" FROM \"xras\".\"request_people_roles\" AS rpr LEFT JOIN \"xras\".\"request_role_types\" AS rrt ON rrt.request_role_type_id = rpr.request_role_type_id LEFT JOIN \"xras\".\"people\" AS p ON p.person_id = rpr.person_id WHERE rrt.request_role_type = 'PI' AND COALESCE(rpr.end_date, '9999-01-01') >= r.entry_date AND rpr.request_id = r.request_id ORDER BY COALESCE(rpr.end_date, '9999-01-01') ASC LIMIT 1)",
-            "pi_xras_organization_id": "(SELECT COALESCE(p.organization_id, -1) AS \"pi_xras_organization_id\" FROM \"xras\".\"request_people_roles\" AS rpr LEFT JOIN \"xras\".\"request_role_types\" AS rrt ON rrt.request_role_type_id = rpr.request_role_type_id LEFT JOIN \"xras\".\"people\" AS p ON p.person_id = rpr.person_id WHERE rrt.request_role_type = 'PI' AND COALESCE(rpr.end_date, '9999-01-01') >= r.entry_date AND rpr.request_id = r.request_id ORDER BY COALESCE(rpr.end_date, '9999-01-01') ASC LIMIT 1)",
-            "action_id": "ac.action_id",
-            "action_entry_date": "(ac.entry_date AT TIME ZONE '${TIMEZONE}')::timestamp",
-            "action_day_id": "EXTRACT(year FROM (ac.entry_date AT TIME ZONE '${TIMEZONE}')::timestamp) * 100000 + EXTRACT(doy FROM (ac.entry_date AT TIME ZONE '${TIMEZONE}')::timestamp)",
-            "action_resolve_date": "(ac.date_resolved AT TIME ZONE '${TIMEZONE}')::timestamp",
-            "action_resolve_day_id": "EXTRACT(year FROM (ac.date_resolved AT TIME ZONE '${TIMEZONE}')::timestamp) * 100000 + EXTRACT(doy FROM (ac.date_resolved AT TIME ZONE '${TIMEZONE}')::timestamp)",
-            "action_type_id": "ac.action_type_id",
-            "action_status_type_id": "ac.action_status_type_id",
-            "resource_amount_type_id": "ares.RESOURCE_AMOUNT_TYPE_ID",
-            "resource_id": "ares.resource_id",
-            "requested": "CASE WHEN ares.RESOURCE_AMOUNT_TYPE_ID = 1 THEN ares.RESOURCE_AMOUNT ELSE null END",
-            "recommended": "CASE WHEN ares.RESOURCE_AMOUNT_TYPE_ID = 3 THEN ares.RESOURCE_AMOUNT ELSE null END",
-            "awarded": "CASE WHEN ares.RESOURCE_AMOUNT_TYPE_ID = 2 THEN ares.RESOURCE_AMOUNT ELSE null END",
-            "request_is_deleted": "r.is_deleted::int",
-            "action_is_deleted": "ac.is_deleted::int"
-        },
-
-        "joins": [{
-            "name": "action_resources",
-            "schema": "${SOURCE_SCHEMA}",
-            "alias": "ares"
-        },{
-            "name": "actions",
-            "schema": "${SOURCE_SCHEMA}",
-            "alias": "ac",
-            "on": "ares.action_id = ac.action_id"
-        },{
-            "name": "requests",
-            "schema": "${SOURCE_SCHEMA}",
-            "alias": "r",
-            "on": "r.request_id = ac.request_id"
-        },{
-            "name": "action_status_types",
-            "schema": "${SOURCE_SCHEMA}",
-            "alias": "a_stat_types",
-            "on": "a_stat_types.action_status_type_id = ac.action_status_type_id"
-        },{
-            "name": "opportunities",
-            "schema": "${SOURCE_SCHEMA}",
-            "alias": "o",
-            "on": "o.opportunity_id = r.opportunity_id"
-        },{
-            "name": "allocations_processes",
-            "schema": "${SOURCE_SCHEMA}",
-            "alias": "alloc_procs",
-            "on": "alloc_procs.allocations_process_id = o.allocations_process_id"
-        }],
-
-        "where": [
-            "alloc_procs.allocations_process_name_abbr = 'NAIRR'",
-            "ac.date_resolved is not null"
-        ]
+  "table_definition": [
+    {
+      "$ref": "${table_definition_dir}/resource_actions/resource_actions_staging.json#/table_definition"
     }
+  ],
+  "source_query": {
+    "records": {
+      "action_resource_id": "ares.action_resource_id",
+      "day_id": "CASE WHEN ares.RESOURCE_AMOUNT_TYPE_ID = 1 THEN (EXTRACT(year FROM (ac.entry_date AT TIME ZONE '${TIMEZONE}')::timestamp) * 100000 + EXTRACT(doy FROM (ac.entry_date AT TIME ZONE '${TIMEZONE}')::timestamp)) ELSE (EXTRACT(year FROM (ac.date_resolved AT TIME ZONE '${TIMEZONE}')::timestamp) * 100000 + EXTRACT(doy FROM (ac.date_resolved AT TIME ZONE '${TIMEZONE}')::timestamp)) END",
+      "opportunity_id": "o.opportunity_id",
+      "allocation_type_id": "o.allocation_type_id",
+      "request_master_id": "r.request_master_id",
+      "request_id": "r.request_id",
+      "request_type_id": "r.request_type_id",
+      "request_entry_date": "(r.entry_date AT TIME ZONE '${TIMEZONE}')::timestamp",
+      "pi_xras_person_id": "(SELECT COALESCE(rpr.person_id, -1) AS \"pi_xras_person_id\" FROM \"xras\".\"request_people_roles\" AS rpr LEFT JOIN \"xras\".\"request_role_types\" AS rrt ON rrt.request_role_type_id = rpr.request_role_type_id LEFT JOIN \"xras\".\"people\" AS p ON p.person_id = rpr.person_id WHERE rrt.request_role_type = 'PI' AND COALESCE(rpr.end_date, '9999-01-01') >= r.entry_date AND rpr.request_id = r.request_id ORDER BY COALESCE(rpr.end_date, '9999-01-01') ASC LIMIT 1)",
+      "pi_xras_organization_id": "(SELECT COALESCE(p.organization_id, -1) AS \"pi_xras_organization_id\" FROM \"xras\".\"request_people_roles\" AS rpr LEFT JOIN \"xras\".\"request_role_types\" AS rrt ON rrt.request_role_type_id = rpr.request_role_type_id LEFT JOIN \"xras\".\"people\" AS p ON p.person_id = rpr.person_id WHERE rrt.request_role_type = 'PI' AND COALESCE(rpr.end_date, '9999-01-01') >= r.entry_date AND rpr.request_id = r.request_id ORDER BY COALESCE(rpr.end_date, '9999-01-01') ASC LIMIT 1)",
+      "action_id": "ac.action_id",
+      "action_entry_date": "(ac.entry_date AT TIME ZONE '${TIMEZONE}')::timestamp",
+      "action_day_id": "EXTRACT(year FROM (ac.entry_date AT TIME ZONE '${TIMEZONE}')::timestamp) * 100000 + EXTRACT(doy FROM (ac.entry_date AT TIME ZONE '${TIMEZONE}')::timestamp)",
+      "action_resolve_date": "(ac.date_resolved AT TIME ZONE '${TIMEZONE}')::timestamp",
+      "action_resolve_day_id": "EXTRACT(year FROM (ac.date_resolved AT TIME ZONE '${TIMEZONE}')::timestamp) * 100000 + EXTRACT(doy FROM (ac.date_resolved AT TIME ZONE '${TIMEZONE}')::timestamp)",
+      "action_type_id": "ac.action_type_id",
+      "action_status_type_id": "ac.action_status_type_id",
+      "resource_amount_type_id": "ares.RESOURCE_AMOUNT_TYPE_ID",
+      "resource_id": "ares.resource_id",
+      "requested": "CASE WHEN ares.RESOURCE_AMOUNT_TYPE_ID = 1 THEN ares.RESOURCE_AMOUNT ELSE null END",
+      "recommended": "CASE WHEN ares.RESOURCE_AMOUNT_TYPE_ID = 3 THEN ares.RESOURCE_AMOUNT ELSE null END",
+      "awarded": "CASE WHEN ares.RESOURCE_AMOUNT_TYPE_ID = 2 THEN ares.RESOURCE_AMOUNT ELSE null END",
+      "request_is_deleted": "r.is_deleted::int",
+      "action_is_deleted": "ac.is_deleted::int"
+    },
+
+    "joins": [
+      {
+        "name": "action_resources",
+        "schema": "${SOURCE_SCHEMA}",
+        "alias": "ares"
+      },
+      {
+        "name": "actions",
+        "schema": "${SOURCE_SCHEMA}",
+        "alias": "ac",
+        "on": "ares.action_id = ac.action_id"
+      },
+      {
+        "name": "requests",
+        "schema": "${SOURCE_SCHEMA}",
+        "alias": "r",
+        "on": "r.request_id = ac.request_id"
+      },
+      {
+        "name": "action_status_types",
+        "schema": "${SOURCE_SCHEMA}",
+        "alias": "a_stat_types",
+        "on": "a_stat_types.action_status_type_id = ac.action_status_type_id"
+      },
+      {
+        "name": "opportunities",
+        "schema": "${SOURCE_SCHEMA}",
+        "alias": "o",
+        "on": "o.opportunity_id = r.opportunity_id"
+      },
+      {
+        "name": "allocations_processes",
+        "schema": "${SOURCE_SCHEMA}",
+        "alias": "alloc_procs",
+        "on": "alloc_procs.allocations_process_id = o.allocations_process_id"
+      }
+    ],
+
+    "where": [
+      "alloc_procs.allocations_process_name_abbr = 'NAIRR'",
+      "ac.date_resolved is not null",
+      "a_stat_types.action_status_type != 'Under Review'"
+    ]
+  }
 }
