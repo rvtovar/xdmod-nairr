@@ -23,16 +23,18 @@ XDMOD_CONFIG_PATH = "/data/www/xdmod/etc"
 
 def load_mapping_file(file):
     mapping = {}
+    orgs = {}
     with open(file, mode="r") as file:
         reader = csv.reader(file)
         for row in reader:
-            if len(row) == 2:
-                orcid, access_username = row
+            if len(row) == 3:
+                orcid, access_username, org_id = row
                 mapping[orcid.strip()] = access_username.strip()
-    return mapping
+                orgs[access_username.strip()] = org_id.strip()
+    return mapping, orgs
 
 
-def update_usernames(cur, mapping):
+def update_usernames(cur, mapping, orgs):
     for orcid, access_username in mapping.items():
         update_query = """
         UPDATE moddb.Users
@@ -41,6 +43,14 @@ def update_usernames(cur, mapping):
         """
         cur.execute(update_query, (access_username, orcid))
         print(f"Updated ORCID {orcid} to username {access_username}")
+    for access_username, org_id in orgs.items():
+        update_query = """
+        UPDATE moddb.Users
+        SET organization_id = %s
+        WHERE username = %s;
+        """
+        cur.execute(update_query, (org_id, access_username))
+        print(f"Updated username {access_username} to organization ID {org_id}")
 
 
 def main():
@@ -52,7 +62,7 @@ def main():
         help="Path to the CSV file containing ORCID to access username mappings.",
     )
     args = parser.parse_args()
-    mapping = load_mapping_file(args.mapping_file)
+    mapping, orgs = load_mapping_file(args.mapping_file)
     if not mapping:
         print("No valid mappings found in the provided file.")
         return
@@ -71,7 +81,7 @@ def main():
     )
 
     cursor = cnx.cursor()
-    update_usernames(cursor, mapping)
+    update_usernames(cursor, mapping, orgs)
     cnx.commit()
     cursor.close()
     cnx.close()

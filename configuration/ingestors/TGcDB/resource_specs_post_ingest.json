@@ -1,0 +1,202 @@
+[
+    {
+        "operation": "execute_sql",
+        "sql": "UPDATE resourcespecs SET cpu_processor_count = 468608, cpu_node_count=8368,cpu_processor_count_per_node=56, gpu_processor_count=0,gpu_node_count=0, gpu_processor_count_per_node=0, name ='TACC-Frontera' WHERE resource_id = 3825"
+    },
+    {
+        "operation": "execute_sql",
+        "sql": "UPDATE resourcespecs SET cpu_processor_count = 1, cpu_node_count=1,cpu_processor_count_per_node=1, gpu_processor_count=0,gpu_node_count=0, gpu_processor_count_per_node=0, name ='DOE-Oak-Ridge-National-Laboratory-Summit' WHERE resource_id = 3837"
+    },
+    {
+        "operation": "execute_sql",
+        "sql": "UPDATE resourcespecs SET cpu_processor_count = 1440, cpu_node_count=90,cpu_processor_count_per_node=16, gpu_processor_count=360,gpu_node_count=90, gpu_processor_count_per_node=4, name ='TACC-Frontera-GPU' WHERE resource_id = 3841"
+    },
+    {
+        "operation": "execute_sql",
+        "sql": "UPDATE resourcespecs SET cpu_processor_count = 93184, cpu_node_count=728,cpu_processor_count_per_node=128, gpu_processor_count=0,gpu_node_count=0, gpu_processor_count_per_node=0, name ='SDSC-Expanse-CPU' WHERE resource_id = 2899"
+    },
+    {
+        "operation": "execute_sql",
+        "sql": "UPDATE resourcespecs SET cpu_processor_count = 2080, cpu_node_count=52,cpu_processor_count_per_node=40, gpu_processor_count=208,gpu_node_count=52, gpu_processor_count_per_node=4, name ='SDSC-Expanse-GPU' WHERE resource_id = 2901"
+    },
+    {
+        "operation": "execute_sql",
+        "sql": "UPDATE resourcespecs SET cpu_processor_count = 384, cpu_node_count=4,cpu_processor_count_per_node=96, gpu_processor_count=0,gpu_node_count=0, gpu_processor_count_per_node=0, name ='PSC-Bridges-2-Extreme-Memory-' WHERE resource_id = 2903"
+    },
+    {
+        "operation": "execute_sql",
+        "sql": "UPDATE resourcespecs SET cpu_processor_count = 1888, cpu_node_count=44,cpu_processor_count_per_node=42.9, gpu_processor_count=360,gpu_node_count=44, gpu_processor_count_per_node=8.18, name ='PSC-Bridges-2-GPU-' WHERE resource_id = 2902"
+    },
+    {
+        "operation": "execute_sql",
+        "sql": "UPDATE resourcespecs SET cpu_processor_count = 64512, cpu_node_count=504,cpu_processor_count_per_node=128, gpu_processor_count=0,gpu_node_count=0, gpu_processor_count_per_node=0, name ='PSC-Bridges-2-Regular-Memory-' WHERE resource_id = 2900"
+    },
+    {
+        "operation": "execute_sql",
+        "sql": "UPDATE resourcespecs SET cpu_processor_count = 71680, cpu_node_count=560,cpu_processor_count_per_node=128, gpu_processor_count=0,gpu_node_count=0, gpu_processor_count_per_node=0, name ='TACC-Lonestar6' WHERE resource_id = 3830"
+    },
+    {
+        "operation": "execute_sql",
+        "sql": "UPDATE resourcespecs SET cpu_processor_count = 11136, cpu_node_count=88,cpu_processor_count_per_node=126.55, gpu_processor_count=260,gpu_node_count=88, gpu_processor_count_per_node=2.95, name ='TACC-Lonestar6-GPU' WHERE resource_id = 3845"
+    },
+    {
+        "operation": "execute_sql",
+        "sql": "UPDATE resourcespecs SET cpu_processor_count = 11520, cpu_node_count=90,cpu_processor_count_per_node=128, gpu_processor_count=360,gpu_node_count=90, gpu_processor_count_per_node=4, name ='Indiana-Jetstream2-GPU' WHERE resource_id = 3197"
+    },
+    {
+        "operation": "execute_sql",
+        "sql": "UPDATE resourcespecs SET cpu_processor_count = 128000, cpu_node_count=1000,cpu_processor_count_per_node=128, gpu_processor_count=0,gpu_node_count=0, gpu_processor_count_per_node=0, name ='Purdue-Anvil-CPU' WHERE resource_id = 3097"
+    },
+    {
+        "operation": "execute_sql",
+        "sql": "UPDATE resourcespecs SET cpu_processor_count = 2048, cpu_node_count=16,cpu_processor_count_per_node=128, gpu_processor_count=64,gpu_node_count=16, gpu_processor_count_per_node=4, name ='Purdue-Anvil-GPU' WHERE resource_id = 3132"
+    },
+    {
+        "operation": "execute_sql",
+        "sql": "UPDATE resourcespecs SET cpu_processor_count = 1, cpu_node_count=1,cpu_processor_count_per_node=1, gpu_processor_count=0,gpu_node_count=0, gpu_processor_count_per_node=0, name ='SDSC-Voyager-' WHERE resource_id = 3831"
+    },
+    {
+        "operation": "execute_sql",
+        "sql": "UPDATE resourcespecs SET cpu_processor_count = 11888, cpu_node_count=130,cpu_processor_count_per_node=91.45, gpu_processor_count=34,gpu_node_count=130, gpu_processor_count_per_node=0.26, name ='TAMU-ACES' WHERE resource_id = 3362"
+    },
+    {
+        "operation": "execute_sql",
+        "sql": "UPDATE resourcespecs SET cpu_processor_count = 1, cpu_node_count=1,cpu_processor_count_per_node=1, gpu_processor_count=0,gpu_node_count=0, gpu_processor_count_per_node=0, name ='DOE-Argonne-National-Laboratory-AI-Testbed' WHERE resource_id = 3846"
+    },
+    {
+        "operation": "execute_sql",
+        "sql": "UPDATE resourcespecs SET cpu_processor_count = 896, cpu_node_count=32,cpu_processor_count_per_node=28, gpu_processor_count=0,gpu_node_count=0, gpu_processor_count_per_node=0, name ='PSC-Neocortex-CS-2' WHERE resource_id = 3527"
+    },
+    {
+        "operation": "execute_sql",
+        "sql": "UPDATE resourcespecs SET cpu_processor_count = 1, cpu_node_count=1,cpu_processor_count_per_node=1, gpu_processor_count=0,gpu_node_count=0, gpu_processor_count_per_node=0, name ='Amazon-Web-Services' WHERE resource_id = 3834"
+    },
+    {
+        "operation": "execute_sql",
+        "sql": "UPDATE resourcespecs SET cpu_processor_count = 1, cpu_node_count=1,cpu_processor_count_per_node=1, gpu_processor_count=0,gpu_node_count=0, gpu_processor_count_per_node=0, name ='Anthropic-Model-API' WHERE resource_id = 3851"
+    },
+    {
+        "operation": "execute_sql",
+        "sql": "UPDATE resourcespecs SET cpu_processor_count = 1, cpu_node_count=1,cpu_processor_count_per_node=1, gpu_processor_count=0,gpu_node_count=0, gpu_processor_count_per_node=0, name ='Google-Cloud-Platform' WHERE resource_id = 3840"
+    },
+    {
+        "operation": "execute_sql",
+        "sql": "UPDATE resourcespecs SET cpu_processor_count = 1, cpu_node_count=1,cpu_processor_count_per_node=1, gpu_processor_count=0,gpu_node_count=0, gpu_processor_count_per_node=0, name ='Groq-LPU-Inference-Engine' WHERE resource_id = 3852"
+    },
+    {
+        "operation": "execute_sql",
+        "sql": "UPDATE resourcespecs SET cpu_processor_count = 1, cpu_node_count=1,cpu_processor_count_per_node=1, gpu_processor_count=0,gpu_node_count=0, gpu_processor_count_per_node=0, name ='Microsoft-Azure' WHERE resource_id = 3839"
+    },
+    {
+        "operation": "execute_sql",
+        "sql": "UPDATE resourcespecs SET cpu_processor_count = 4096, cpu_node_count=32,cpu_processor_count_per_node=128, gpu_processor_count=256,gpu_node_count=32, gpu_processor_count_per_node=8, name ='NVIDIA-DGX-Cloud' WHERE resource_id = 3824"
+    },
+    {
+        "operation": "execute_sql",
+        "sql": "UPDATE resourcespecs SET cpu_processor_count = 1, cpu_node_count=1,cpu_processor_count_per_node=1, gpu_processor_count=0,gpu_node_count=0, gpu_processor_count_per_node=0, name ='OpenAI-API' WHERE resource_id = 3847"
+    },
+    {
+        "operation": "execute_sql",
+        "sql": "UPDATE resourcespecs SET cpu_processor_count = 1, cpu_node_count=1,cpu_processor_count_per_node=1, gpu_processor_count=0,gpu_node_count=0, gpu_processor_count_per_node=0, name ='Vocareum-AI-Notebook' WHERE resource_id = 3849"
+    },
+    {
+        "operation": "execute_sql",
+        "sql": "UPDATE resourcespecs SET cpu_processor_count = 1, cpu_node_count=1,cpu_processor_count_per_node=1, gpu_processor_count=0,gpu_node_count=0, gpu_processor_count_per_node=0, name ='Prototype-National-Research-Platform-' WHERE resource_id = 3848"
+    },
+    {
+        "operation": "execute_sql",
+        "sql": "UPDATE resourcespecs SET cpu_processor_count = 1, cpu_node_count=1,cpu_processor_count_per_node=1, gpu_processor_count=0,gpu_node_count=0, gpu_processor_count_per_node=0, name ='NIH-Cloud-Lab' WHERE resource_id = 3842"
+    },
+    {
+        "operation": "execute_sql",
+        "sql": "UPDATE resourcespecs SET cpu_processor_count = 1, cpu_node_count=1,cpu_processor_count_per_node=1, gpu_processor_count=0,gpu_node_count=0, gpu_processor_count_per_node=0, name ='Weights---Biases-MLOps-Platform' WHERE resource_id = 3844"
+    },
+    {
+        "operation": "execute_sql",
+        "sql": "UPDATE resourcespecs SET cpu_processor_count = 43776, cpu_node_count=152,cpu_processor_count_per_node=288, gpu_processor_count=608,gpu_node_count=152, gpu_processor_count_per_node=4, name ='NCSA-DeltaAI' WHERE resource_id = 3626"
+    },
+    {
+        "operation": "execute_sql",
+        "sql": "UPDATE resourcespecs SET cpu_processor_count = 1, cpu_node_count=1,cpu_processor_count_per_node=1, gpu_processor_count=0,gpu_node_count=0, gpu_processor_count_per_node=0, name ='EleutherAI-Collaborations' WHERE resource_id = 3833"
+    },
+    {
+        "operation": "execute_sql",
+        "sql": "UPDATE resourcespecs SET cpu_processor_count = 1, cpu_node_count=1,cpu_processor_count_per_node=1, gpu_processor_count=0,gpu_node_count=0, gpu_processor_count_per_node=0, name ='Hugging-Face-Spaces-and-Compute-Grants' WHERE resource_id = 3838"
+    },
+    {
+        "operation": "execute_sql",
+        "sql": "UPDATE resourcespecs SET cpu_processor_count = 1, cpu_node_count=1,cpu_processor_count_per_node=1, gpu_processor_count=0,gpu_node_count=0, gpu_processor_count_per_node=0, name ='OpenMined-Collaborations' WHERE resource_id = 3835"
+    },
+    {
+        "operation": "execute_sql",
+        "sql": "UPDATE resourcespecs SET cpu_processor_count = 1, cpu_node_count=1,cpu_processor_count_per_node=1, gpu_processor_count=0,gpu_node_count=0, gpu_processor_count_per_node=0, name ='Databricks-Data-Intelligence-Platform-' WHERE resource_id = 3836"
+    },
+    {
+        "operation": "execute_sql",
+        "sql": "UPDATE resourcespecs SET cpu_processor_count = 1, cpu_node_count=1,cpu_processor_count_per_node=1, gpu_processor_count=0,gpu_node_count=0, gpu_processor_count_per_node=0, name ='Cerebras-Wafer-Scale-Engine-2-' WHERE resource_id = 3850"
+    },
+    {
+        "operation": "execute_sql",
+        "sql": "UPDATE resourcespecs SET cpu_processor_count = 1, cpu_node_count=1,cpu_processor_count_per_node=1, gpu_processor_count=0,gpu_node_count=0, gpu_processor_count_per_node=0, name ='SambaCloud-' WHERE resource_id = 3829"
+    },
+    {
+        "operation": "execute_sql",
+        "sql": "UPDATE resourcespecs SET cpu_processor_count = 13568, cpu_node_count=206,cpu_processor_count_per_node=65.86, gpu_processor_count=848,gpu_node_count=206, gpu_processor_count_per_node=4.12, name ='NCSA-Delta-GPU' WHERE resource_id = 3032"
+    },
+    {
+        "operation": "execute_sql",
+        "sql": "UPDATE resourcespecs SET cpu_processor_count = 15872, cpu_node_count=124,cpu_processor_count_per_node=128, gpu_processor_count=0,gpu_node_count=0, gpu_processor_count_per_node=0, name ='NCSA-Delta-CPU' WHERE resource_id = 3031"
+    },
+    {
+        "operation": "execute_sql",
+        "sql": "UPDATE resourcespecs SET cpu_processor_count = 2352, cpu_node_count=21,cpu_processor_count_per_node=112, gpu_processor_count=84,gpu_node_count=21, gpu_processor_count_per_node=4, name ='Purdue-Anvil-AI' WHERE resource_id = 3827"
+    },
+    {
+        "operation": "execute_sql",
+        "sql": "UPDATE resourcespecs SET cpu_processor_count = 133680, cpu_node_count=1867,cpu_processor_count_per_node=71.6, gpu_processor_count=10240,gpu_node_count=20, gpu_processor_count_per_node=512, name ='TACC-Vista-' WHERE resource_id = 3826"
+    },
+    {
+        "operation": "execute_sql",
+        "sql": "UPDATE resourcespecs SET cpu_processor_count = 2448, cpu_node_count=34,cpu_processor_count_per_node=72, gpu_processor_count=136,gpu_node_count=34, gpu_processor_count_per_node=4, name ='SDSC-Expanse-AI-Resource' WHERE resource_id = 3828"
+    },
+    {
+        "operation": "execute_sql",
+        "sql": "UPDATE resourcespecs SET cpu_processor_count = 1, cpu_node_count=1,cpu_processor_count_per_node=1, gpu_processor_count=0,gpu_node_count=0, gpu_processor_count_per_node=0, name ='Voltage-Park' WHERE resource_id = 3857"
+    },
+    {
+        "operation": "execute_sql",
+        "sql": "UPDATE resourcespecs SET cpu_processor_count = 1, cpu_node_count=1,cpu_processor_count_per_node=1, gpu_processor_count=0,gpu_node_count=0, gpu_processor_count_per_node=0, name ='Chameleon' WHERE resource_id = 3923"
+    },
+    {
+        "operation": "execute_sql",
+        "sql": "UPDATE resourcespecs SET cpu_processor_count = 1, cpu_node_count=1,cpu_processor_count_per_node=1, gpu_processor_count=0,gpu_node_count=0, gpu_processor_count_per_node=0, name ='IBM-&-the-AI-Alliance-' WHERE resource_id = 3957"
+    },
+    {
+        "operation": "execute_sql",
+        "sql": "INSERT INTO resourcespecs (resource_id, start_date_ts, start_day_id, end_date_ts, end_day_id, normalization_factor, cpu_processor_count, cpu_node_count, cpu_processor_count_per_node, gpu_processor_count, gpu_node_count, gpu_processor_count_per_node, name) VALUES (4022, 1756958400.0, 202500247, 1764046799.0, 202500328, 0.12477384740158463, 1, 1, 1, 0, 0, 0, 'Lexset-Seahaven')"
+    },
+    {
+        "operation": "execute_sql",
+        "sql": "INSERT INTO resourcespecs (resource_id, start_date_ts, start_day_id, end_date_ts, end_day_id, normalization_factor, cpu_processor_count, cpu_node_count, cpu_processor_count_per_node, gpu_processor_count, gpu_node_count, gpu_processor_count_per_node, name) VALUES (4026, 1756958400.0, 202500247, 1764046799.0, 202500328, 0.12477384740158463, 1, 1, 1, 0, 0, 0, 'Sage-Edge-Computing-Platform')"
+    },
+    {
+        "operation": "execute_sql",
+        "sql": "INSERT INTO resourcespecs (resource_id, start_date_ts, start_day_id, end_date_ts, end_day_id, normalization_factor, cpu_processor_count, cpu_node_count, cpu_processor_count_per_node, gpu_processor_count, gpu_node_count, gpu_processor_count_per_node, name) VALUES (3725, 1722484800.0, 202400214, 1764046799.0, 202500328, 0.9874602283361408, 318464, 2488, 128, 0, 0, 0, 'NSF-NCAR-Derecho')"
+    },
+    {
+        "operation": "execute_sql",
+        "sql": "INSERT INTO resourcespecs (resource_id, start_date_ts, start_day_id, end_date_ts, end_day_id, normalization_factor, cpu_processor_count, cpu_node_count, cpu_processor_count_per_node, gpu_processor_count, gpu_node_count, gpu_processor_count_per_node, name) VALUES (67, 1704085200, 202400001, 1753156799, 202500202, 1, 1, 1, 1, 0, 0, 0, 'No-resource-preference--Choose-for-me-')"
+    },
+    {
+        "operation": "execute_sql",
+        "sql": "INSERT INTO resourcespecs (resource_id, start_date_ts, start_day_id, end_date_ts, end_day_id, normalization_factor, cpu_processor_count, cpu_node_count, cpu_processor_count_per_node, gpu_processor_count, gpu_node_count, gpu_processor_count_per_node, name) VALUES (3832, 1748750400.0, 202500152, 1764046799.0, 202500328, 0.12477384740158463, 1, 1, 1, 0, 0, 0, 'FABRIC')"
+    },
+    {
+        "operation": "execute_sql",
+        "sql": "INSERT INTO resourcespecs (resource_id, start_date_ts, start_day_id, end_date_ts, end_day_id, normalization_factor, cpu_processor_count, cpu_node_count, cpu_processor_count_per_node, gpu_processor_count, gpu_node_count, gpu_processor_count_per_node, name) VALUES (2799, 1423717200.0, 201500043, 1764046799.0, 202500328, 0.3926632977727868, 1, 1, 1, 0, 0, 0, 'OSG-Open-Science-Pool')"
+    },
+    {
+        "operation": "execute_sql",
+        "sql": "INSERT INTO resourcespecs (resource_id, start_date_ts, start_day_id, end_date_ts, end_day_id, normalization_factor, cpu_processor_count, cpu_node_count, cpu_processor_count_per_node, gpu_processor_count, gpu_node_count, gpu_processor_count_per_node, name) VALUES (3843, 1748750400.0, 202500152, 1764046799.0, 202500328, 0.12477384740158463, 1, 1, 1, 0, 0, 0, 'SambaNova-Suite-')"
+    }
+]

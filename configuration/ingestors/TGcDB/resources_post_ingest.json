@@ -1,0 +1,207 @@
+[
+  {
+    "operation": "execute_sql",
+    "sql": "UPDATE resourcefact SET code = 'TACC-Frontera', name='TACC Frontera',description='None', resource_allocation_type_id = 3 WHERE id = 3825"
+  },
+
+  {
+    "operation": "execute_sql",
+    "sql": "UPDATE resourcefact SET code = 'DOE-Oak-Ridge-National-Laboratory-Summit', name='DOE Oak Ridge National Laboratory Summit',description='Projects using the <a href=\"https://www.olcf.ornl.gov/olcf-resources/compute-systems/summit/\" target=\"_blank\">DOE ORNL Summit system</a> are expected to use significant portions of the resource. In addition, use of Summit must comply with other federal legal requirements. Your answers to the questions below will help determine if your project is eligible to use Summit.', resource_allocation_type_id = 3 WHERE id = 3837"
+  },
+  {
+    "operation": "execute_sql",
+    "sql": "UPDATE resourcefact SET code = 'TACC-Frontera-GPU', name='TACC Frontera GPU',description='See the <a href=\"https://docs.tacc.utexas.edu/hpc/frontera/\" target=\"_blank\">Frontera User Guide</a> for more resource information.\r\nMaximum LRAC request is 200,000 node hours.\r\nMaximum Pathways request is 12,000 node hours.\r\nMaximum LSCP request is 30,000 node hours.\r\nMaximum Startup request is 100 node hours.\r\nDirector Discretionary request is per consultation with TACC staff.\r\n', resource_allocation_type_id = 3 WHERE id = 3841"
+  },
+  {
+    "operation": "execute_sql",
+    "sql": "UPDATE resourcefact SET code = 'SDSC-Expanse-CPU', name='SDSC Expanse CPU',description='SDSC Expanse Dell/AMD Rome cluster with HDR InfiniBand designed to provide cyberinfrastructure for the long tail of science, covering a diverse application base with complex workflows.', resource_allocation_type_id = 3 WHERE id = 2899"
+  },
+  {
+    "operation": "execute_sql",
+    "sql": "UPDATE resourcefact SET code = 'SDSC-Expanse-GPU', name='SDSC Expanse GPU',description='SDSC Expanse Dell/NVIDIA V100 cluster with NVLINK and HDR InfiniBand recommend to be used for accelerating codes optimized to take advantage of GPUs.', resource_allocation_type_id = 3 WHERE id = 2901"
+  },
+  {
+    "operation": "execute_sql",
+    "sql": "UPDATE resourcefact SET code = 'PSC-Bridges-2-Extreme-Memory-', name='PSC Bridges-2 Extreme Memory (PSC Bridges-2 EM)',description='1 SU = 1 core hour', resource_allocation_type_id = 3 WHERE id = 2903"
+  },
+  {
+    "operation": "execute_sql",
+    "sql": "UPDATE resourcefact SET code = 'PSC-Bridges-2-GPU-', name='PSC Bridges-2 GPU (PSC Bridges-2 GPU)',description='1 SU = 1 GPU hour', resource_allocation_type_id = 3 WHERE id = 2902"
+  },
+  {
+    "operation": "execute_sql",
+    "sql": "UPDATE resourcefact SET code = 'PSC-Bridges-2-Regular-Memory-', name='PSC Bridges-2 Regular Memory (PSC Bridges-2 RM)',description='1 SU = 1 core hour', resource_allocation_type_id = 3 WHERE id = 2900"
+  },
+  {
+    "operation": "execute_sql",
+    "sql": "UPDATE resourcefact SET code = 'TACC-Lonestar6', name='TACC Lonestar6',description='See the <a href=\"https://docs.tacc.utexas.edu/hpc/lonestar6/\" target=\"_blank\">Lonestar6 User Guide</a> for resource details.', resource_allocation_type_id = 3 WHERE id = 3830"
+  },
+  {
+    "operation": "execute_sql",
+    "sql": "UPDATE resourcefact SET code = 'TACC-Lonestar6-GPU', name='TACC Lonestar6-GPU',description='See the <a href=\"https://docs.tacc.utexas.edu/hpc/lonestar6/\" target=\"_blank\">Lonestar6 User Guide</a> for resource details.', resource_allocation_type_id = 3 WHERE id = 3845"
+  },
+  {
+    "operation": "execute_sql",
+    "sql": "UPDATE resourcefact SET code = 'Indiana-Jetstream2-GPU', name='Indiana Jetstream2 GPU',description='Jetstream2 GPU VMs are charged 2x the number of vCPUs per hour because of the associated GPU capability. For example, the g3.large VM costs 32 SUs per hour. VM sizes and cost per hour are available at <a href=\"https://docs.jetstream-cloud.org/general/vmsizes/\">the Jetstream2 website</a>.', resource_allocation_type_id = 3 WHERE id = 3197"
+  },
+  {
+    "operation": "execute_sql",
+    "sql": "UPDATE resourcefact SET code = 'Purdue-Anvil-CPU', name='Purdue Anvil CPU',description='1 Anvil CPU Service Unit = 1 Core Hour on a regular node\r\n4 Anvil CPU Service Units = 1 Core Hour on a large memory node\r\n', resource_allocation_type_id = 3 WHERE id = 3097"
+  },
+  {
+    "operation": "execute_sql",
+    "sql": "UPDATE resourcefact SET code = 'Purdue-Anvil-GPU', name='Purdue Anvil GPU',description='1 Anvil GPU Service Unit = 1 A100 GPU hour on a quad-NVIDIA A100 node', resource_allocation_type_id = 3 WHERE id = 3132"
+  },
+  {
+    "operation": "execute_sql",
+    "sql": "UPDATE resourcefact SET code = 'SDSC-Voyager-', name='SDSC Voyager (Habana Training and Inference Processor based AI System)',description='SDSC Voyager cluster with Intel Habana Gaudi training processors for deep learning applications. Voyager does not have general-purpose GPUs. The Gaudi training processors are custom designed and optimized for deep learning. Only AI/scientific applications that feature deep learning are recommended for use on this system.\r\n', resource_allocation_type_id = 3 WHERE id = 3831"
+  },
+  {
+    "operation": "execute_sql",
+    "sql": "UPDATE resourcefact SET code = 'TAMU-ACES', name='TAMU ACES',description='', resource_allocation_type_id = 3 WHERE id = 3362"
+  },
+  {
+    "operation": "execute_sql",
+    "sql": "UPDATE resourcefact SET code = 'DOE-Argonne-National-Laboratory-AI-Testbed', name='DOE Argonne National Laboratory AI Testbed',description='The <a href=\"https://www.alcf.anl.gov/alcf-ai-testbed\" target=\"_blank\">DOE ALCF AI Testbed</a> provides some of the most advanced AI accelerators for open scientific research. These resources will help accelerate the execution of diverse AI models. ', resource_allocation_type_id = 3 WHERE id = 3846"
+  },
+  {
+    "operation": "execute_sql",
+    "sql": "UPDATE resourcefact SET code = 'PSC-Neocortex-', name='PSC Neocortex CS-2',description='The Neocortex is a testbed system incorporating the Cerebras Wafer Engine (WSE), an accelerator initially designed for optimizing AI training and inferencing. Since its introduction a few years ago, the chip has demonstrated its effectiveness in accelerating specific non-AI workflows as well. Notably, the WSE is utilized in lieu of other accelerators, such as GPUs.\r\n\r\nNeocortex projects are expected to require the powerful compute capabilities offered by the Cerebras server and the wafer scale engine chip. Neocortex is ideal for a well-defined group of foundation and large language models. Please refer to <a href=\"https://portal.neocortex.psc.edu/docs/index.html\" target=\"_blank\">the Neocortex user guide</a> for more information on the models supported and the type of applications ideally suited for Neocortex.', resource_allocation_type_id = 3 WHERE id = 3527"
+  },
+  {
+    "operation": "execute_sql",
+    "sql": "UPDATE resourcefact SET code = 'Amazon-Web-Services', name='Amazon Web Services',description='Credit amounts to be provided to an individual project will depend on project scope, resourcing needs, and resource availability. Research proposals should incorporate <a href=\"https://www.cloudbank.org/best-practices-nairr-cloud-resource-requests\" target=\"_blank\">best practices</a> published by the NSF-sponsored CloudBank program.  The inclusion of a cost estimate that aligns with your proposal using the <a href=\"https://calculator.aws/#/\"  target=\"_blank\">AWS Pricing Calculator</a> is required. AWS Promotional Credits will be made available through <a href=\"https://www.cloudbank.org\" target=\"_blank\"> CloudBank</a>. CloudBank provides front-line help desk support, cloud solution consulting, training, account management, and cost monitoring and optimization support, and automated billing.  If you have any questions about estimating costs, please reach out to <a href=\"mailto:help@cloudbank.org\"  target=\"_blank\">help@cloudbank.org</a>.\r\n', resource_allocation_type_id = 3 WHERE id = 3834"
+  },
+  {
+    "operation": "execute_sql",
+    "sql": "UPDATE resourcefact SET code = 'Anthropic-Model-API', name='Anthropic Model API',description='For up to 10 research teams, Athropic is providing educational resources and API credits for Anthropic model access for climate and environmental research.', resource_allocation_type_id = 3 WHERE id = 3851"
+  },
+  {
+    "operation": "execute_sql",
+    "sql": "UPDATE resourcefact SET code = 'Google-Cloud-Platform', name='Google Cloud Platform',description='Credit amounts to be provided to an individual project will depend on project scope, resourcing needs, and resource availability. Research proposals should incorporate <a href=\"https://www.cloudbank.org/best-practices-nairr-cloud-resource-requests\" target=\"_blank\">best practices</a> published by the NSF-sponsored CloudBank program.  The inclusion of a cost estimate that aligns with your proposal using the <a href=\"https://cloud.google.com/products/calculator\"  target=\"_blank\">Google Cloud Pricing Calculator</a> is required. Google Cloud credits will be made available through <a href=\"https://www.cloudbank.org\" target=\"_blank\"> CloudBank</a>. CloudBank provides front-line help desk support, cloud solution consulting, training, account management, and cost monitoring and optimization support, and automated billing.  If you have any questions about estimating costs, please reach out to <a href=\"mailto:help@cloudbank.org\"  target=\"_blank\">help@cloudbank.org</a>.', resource_allocation_type_id = 3 WHERE id = 3840"
+  },
+  {
+    "operation": "execute_sql",
+    "sql": "UPDATE resourcefact SET code = 'Groq-LPU-Inference-Engine', name='Groq LPU Inference Engine',description='Groq is providing access for up to 10 research teams to use Groq''s Language Processing Unit (LPU) Inference Engine via GroqCloud. Groq will collaborate with NAIRR researchers to determine the capacity parameters required for their research and adjust rate limits accordingly. ', resource_allocation_type_id = 3 WHERE id = 3852"
+  },
+  {
+    "operation": "execute_sql",
+    "sql": "UPDATE resourcefact SET code = 'Microsoft-Azure', name='Microsoft Azure',description='Credit amounts to be provided to an individual project will depend on project scope, resourcing needs, and resource availability. Research proposals should incorporate <a href=\"https://www.cloudbank.org/best-practices-nairr-cloud-resource-requests\" target=\"_blank\">best practices</a> published by the NSF-sponsored CloudBank program.  The inclusion of a cost estimate that aligns with your proposal using the <a href=\"https://azure.microsoft.com/en-us/pricing/calculator/\"  target=\"_blank\">Azure Pricing Calculator</a> is required. Credits will be made available through <a href=\"https://www.cloudbank.org\" target=\"_blank\">NSF-CloudBank</a>. CloudBank provides front-line help desk support, cloud solution consulting, training, account management, and cost monitoring and optimization support, and automated billing.  If you have any questions about estimating costs, please reach out to <a href=\"mailto:help@cloudbank.org\"  target=\"_blank\">help@cloudbank.org</a>.\r\n', resource_allocation_type_id = 3 WHERE id = 3839"
+  },
+  {
+    "operation": "execute_sql",
+    "sql": "UPDATE resourcefact SET code = 'NVIDIA-DGX-Cloud', name='NVIDIA DGX Cloud',description='We request that the initial NAIRR Pilot projects for the DGX Cloud require a dedicated 32 node DGX Cloud cluster for at least one month. Requests should be made for a minimum of 32 nodes for 1 month (720 hours). For the dedicated 32-node cluster, the minimum request is 184,320 GPU-hours. Requests larger than one month should increase in one-week increments.', resource_allocation_type_id = 3 WHERE id = 3824"
+  },
+  {
+    "operation": "execute_sql",
+    "sql": "UPDATE resourcefact SET code = 'OpenAI-API', name='OpenAI API',description='OpenAI API credits will be allocated in $5K, $25K, $50K, and $100K units. Researchers are encouraged to review the <a href=\"https://openai.com/pricing\" target=\"_blank\">OpenAI pricing information</a> to determine the estimated scale of their project''s needs.', resource_allocation_type_id = 3 WHERE id = 3847"
+  },
+  {
+    "operation": "execute_sql",
+    "sql": "UPDATE resourcefact SET code = 'Vocareum-AI-Notebook', name='Vocareum AI Notebook',description='Vocareum has provided to the NAIRR Pilot 20,000 concurrent user licenses for its advanced Jupyter-based Notebook over two years.', resource_allocation_type_id = 3 WHERE id = 3849"
+  },
+  {
+    "operation": "execute_sql",
+    "sql": "UPDATE resourcefact SET code = 'Prototype-National-Research-Platform-', name='Prototype National Research Platform (PNRP) Classroom',description='PNRP Classroom offers GPU resources for your students and a Jupyter platform for teaching a class that makes heavy use of AI/ML and. Our default platform has nodes each with 8 A10 GPUs, 512GB of RAM, 2 AMD EPYC 7502 CPUs, and 8TB of NVMe. Depending on your needs, we may be able to provision other GPU resources via the NAIRR pilot and make it available to your class.', resource_allocation_type_id = 3 WHERE id = 3848"
+  },
+  {
+    "operation": "execute_sql",
+    "sql": "UPDATE resourcefact SET code = 'NIH-Cloud-Lab', name='NIH Cloud Lab',description='Through the NAIRR Classroom program, undergraduate, graduate, or professional training instructors can gain access to Cloud Lab for testing or teaching courses/workshops related to life science.  Cloud Lab users will receive up to 90 days of access to AWS, GCP, or Microsoft Azure, plus up to $500 of cloud credits per user.', resource_allocation_type_id = 3 WHERE id = 3842"
+  },
+  {
+    "operation": "execute_sql",
+    "sql": "UPDATE resourcefact SET code = 'Weights---Biases-MLOps-Platform', name='Weights & Biases MLOps Platform',description='W&B will offer accepted participants <a href=\"https://wandb.ai/site/for-enterprise/deployment-options\" target=\"_blank\">W&B SaaS Cloud User License</a> for use during their project. W&B will offer periodic office hours and general user support in addition to the robust user documentation and community.', resource_allocation_type_id = 3 WHERE id = 3844"
+  },
+  {
+    "operation": "execute_sql",
+    "sql": "UPDATE resourcefact SET code = 'NCSA-DeltaAI', name='NCSA DeltaAI',description='1 GPU Hour = 1 Grace Hopper GPU-Hour on a quad-NVIDIA Grace Hopper node (using 1 of the 4 GPUs) in the normal queue. ', resource_allocation_type_id = 3 WHERE id = 3626"
+  },
+  {
+    "operation": "execute_sql",
+    "sql": "UPDATE resourcefact SET code = 'EleutherAI-Collaborations', name='EleutherAI Collaborations',description='Opportunity to collaborate with EleutherAI to train a LLM using the EleutherAI libraries.', resource_allocation_type_id = 3 WHERE id = 3833"
+  },
+  {
+    "operation": "execute_sql",
+    "sql": "UPDATE resourcefact SET code = 'Hugging-Face-Spaces-and-Compute-Grants', name='Hugging Face Spaces and Compute Grants',description='Access to compute grants valued at up to $10,000 each for HuggingFace <a href=\"https://huggingface.co/spaces/launch\" target=\"_blank\">Spaces</a> and <a href=\"https://huggingface.co/inference-endpoints/dedicated\" target=\"_blank\">Inference Endpoints</a>. All of our documentation can be found at: <a href=\"https://huggingface.co/docs\" target=\"_blank\">https://huggingface.co/docs</a>.', resource_allocation_type_id = 3 WHERE id = 3838"
+  },
+  {
+    "operation": "execute_sql",
+    "sql": "UPDATE resourcefact SET code = 'OpenMined-Collaborations', name='OpenMined Collaborations',description='OpenMined offers infrastructure and education services for small or large consortias (groups of two or more researchers) to use each others’ private data for research. ', resource_allocation_type_id = 3 WHERE id = 3835"
+  },
+  {
+    "operation": "execute_sql",
+    "sql": "UPDATE resourcefact SET code = 'Databricks-Data-Intelligence-Platform-', name='Databricks Data Intelligence Platform ',description='Because it can be hard to estimate DBU usage for those who have no experience with the platform, you should contact <a href=\"mailto:universityresearch@databricks.com\"> universityresearch@databricks.com</a> for help estimating their DBU and AWS needs prior to submitting your NAIRR Pilot proposal.', resource_allocation_type_id = 3 WHERE id = 3836"
+  },
+  {
+    "operation": "execute_sql",
+    "sql": "UPDATE resourcefact SET code = 'Cerebras-Wafer-Scale-Engine-2-', name='Cerebras Wafer-Scale Engine 2 (CS-2) AI Accelerator',description='Cerebras will provide compute time on clusters up to 16 Cerebras CS-2 systems (powered by the Wafer-Scale Engine 2), in addition to expert AI professional services.', resource_allocation_type_id = 3 WHERE id = 3850"
+  },
+
+  {
+    "operation": "execute_sql",
+    "sql": "UPDATE resourcefact SET code = 'NCSA-Delta-GPU', name='NCSA Delta GPU',description='1 GPU Hour = 1 A100 GPU-Hour on a quad-NVIDIA A100 node (using 1 of the 4 GPUs) in the normal queue. A40 GPUs are discounted while large memory GPU nodes have a premium charge. Details on the charge rates are available in the <a href=\"https://docs.ncsa.illinois.edu/systems/delta/en/latest/\" target=\"_blank\">Delta user guide</a> (refer to the partitions section under running jobs).', resource_allocation_type_id = 3 WHERE id = 3032"
+  },
+  {
+    "operation": "execute_sql",
+    "sql": "UPDATE resourcefact SET code = 'Purdue-Anvil-AI', name='Purdue Anvil AI',description='1 GPU-hour = 1 H100 GPU hour on a quad-NVIDIA H100 node', resource_allocation_type_id = 3 WHERE id = 3827"
+  },
+  {
+    "operation": "execute_sql",
+    "sql": "UPDATE resourcefact SET code = 'TACC-Vista-', name='TACC Vista (NVIDIA GH100 Grace Hopper Superchip)',description='', resource_allocation_type_id = 3 WHERE id = 3826"
+  },
+
+  {
+    "operation": "execute_sql",
+    "sql": "UPDATE resourcefact SET code = 'NCSA-Delta-CPU-', name='NCSA Delta CPU (Delta CPU)',description='1 Core hour = 1 CPU Core-hour in the normal priority partition. One hour using a full Delta CPU node will cost 128 core hours in the normal priority partition.', resource_allocation_type_id = 3 WHERE id = 3031"
+  },
+  {
+    "operation": "execute_sql",
+    "sql": "UPDATE resourcefact SET code = 'SambaCloud-', name='SambaCloud (API inference services, Llama, DeepSeek, Qwen, etc.)',description='SambaNova SambaCloud: Enterprise Tier accounts are available with API credits allocated in $1,000 and $3,000 increments. Researchers may find <a href=\"https://cloud.sambanova.ai/plans/pricing\" target=\"_blank\">SambaCloud pricing</a> helpful in estimating their needs.', resource_allocation_type_id = 3 WHERE id = 3829"
+  },
+  {
+    "operation": "execute_sql",
+    "sql": "UPDATE resourcefact SET code = 'SDSC-Expanse-AI-Resource', name='SDSC Expanse AI Resource',description='The Expanse AI resource features 34 Dell XE9640 servers, each containing four NVIDIA H100 GPUs, two 36-core Intel Sapphire Road processors, 1 TB of RAM and 6.4 TB of local NVMe storage. ', resource_allocation_type_id = 3 WHERE id = 3828"
+  },
+  {
+    "operation": "execute_sql",
+    "sql": "UPDATE resourcefact SET code = 'Chameleon', name='Chameleon',description='Chameleon projects are awarded a standard allocation of 20,000 Service Units (SUs), which is rechargeable or renewable depending on the standing of the project. Chameleon SUs equate to one hour of wall clock time on a base bare metal server; specific instances may be charged a multiple of an SU (e.g., if they include accelerators) or a fraction of an SU (e.g., virtualized instances) as explained on the <a href=\"https://chameleoncloud.org/learn/frequently-asked-questions/#toc-project-and-allocation-management\" target=\"_blank\">Chameleon allocation FAQ</a>. ', resource_allocation_type_id = 3 WHERE id = 3923"
+  },
+
+  {
+    "operation": "execute_sql",
+    "sql": "UPDATE resourcefact SET code = 'Voltage-Park', name='Voltage Park',description='Voltage park resource', resource_allocation_type_id = 3 WHERE id = 3857"
+  },
+  {
+    "operation": "execute_sql",
+    "sql": "UPDATE resourcefact SET code = 'IBM-&-the-AI-Alliance-', name='IBM & the AI Alliance — Collaboration on Open-Source Cloud Platform, Models and Tools',description='IBM & the AI Alliance — Collaboration on Open-Source Cloud Platform, Models and Tools', resource_allocation_type_id = 3 WHERE id = 3957"
+  },
+  {
+    "operation": "execute_sql",
+    "sql": "INSERT INTO resourcefact (id, code, name, description, resource_allocation_type_id, resourcetype_id, organization_id) VALUES (3725, 'NSF-NCAR-Derecho', 'NSF NCAR Derecho', 'The Derecho supercomputer is a 19.87-petaflops HPE Cray EX cluster with 2,488 nodes, each with two 64-core AMD EPYC 7763 Milan processors, for a total of 323,712 processor cores. NSF NCAR operates Derecho in support of work in Earth system science or related to Earth system science.', 3,1,653)"
+  },
+  {
+    "operation": "execute_sql",
+    "sql": "INSERT INTO resourcefact (id, code, name, description, resource_allocation_type_id,resourcetype_id,organization_id) VALUES (67, 'No-resource-preference--Choose-for-me-', 'No resource preference. Choose for me.', 'Select this option to have your project assigned by reviewers to a suitable resource from among those available for the NAIRR pilot. Provide your best estimate for resource GPU-hours to help give a sense of scale for your planned activities.', 3, 13, 1)"
+  },
+  {
+    "operation": "execute_sql",
+    "sql": "INSERT INTO resourcefact (id, code, name, description, resource_allocation_type_id,resourcetype_id,organization_id) VALUES (3832, 'FABRIC', 'FABRIC', 'FABRIC users will obtain and reserve FABRIC resources for their experimental project on a “slice.\" Slices provide VMs with limited virtual compute, storage, and network capacity which can be chosen by the user. Users requiring long running experiments, exclusive access, or usage of particular physical resources such as smart NICs, FPGAs, GPUs, significant persistent network storage, or QoS capabilities, should see the FABRIC User guide for instructions describing how to request access to these resources.', 3, 13,2000 )"
+  },
+
+  {
+    "operation": "execute_sql",
+    "sql": "INSERT INTO resourcefact (id, code, name, description, resource_allocation_type_id, resourcetype_id, organization_id) VALUES (2799, 'OSG-Open-Science-Pool', 'OSG Open Science Pool', '1 SU = 1 Core-hour', 3,1,2440)"
+  },
+  {
+    "operation": "execute_sql",
+    "sql": "INSERT INTO resourcefact (id, code, name, description, resource_allocation_type_id, resourcetype_id, organization_id) VALUES (4022, 'Lexset-Seahaven', 'Lexset Seahaven', 'Researchers can gain supported web-based and API access to Lexset''s Seahaven synthetic data generation platform. Lexset will also provide GPU access for the data creation. The tools and support from Lexset will enable researchers to rapidly create, iterate, and refine high-quality synthetic datasets tailored to specific computer vision challenges across a range of use cases.', 3,5,27121)"
+  },
+  {
+    "operation": "execute_sql",
+    "sql": "INSERT INTO resourcefact (id, code, name, description, resource_allocation_type_id, resourcetype_id, organization_id) VALUES (4026, 'Sage-Edge-Computing-Platform', 'Sage Edge Computing Platform', 'Sage is an edge computing platform best suited for real-time AI processing of data from locally connected instruments, including cameras, meteorological sensors, air quality monitors, and soil and water sensors.', 3,1,178)"
+  },
+  {
+    "operation": "execute_sql",
+    "sql": "INSERT INTO resourcefact (id, code, name, description, resource_allocation_type_id, resourcetype_id, organization_id) VALUES (3843, 'SambaNova-Suite-', 'SambaNova Suite (LLMOps platform, fine-tuning, inference and app dev kits)', 'SambaNova Suite access is allocated to researchers in terms of processing hours on our hosted systems.', 3,5,20126)"
+  }
+]
