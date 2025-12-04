@@ -79,9 +79,11 @@ Ext.extend(XDMoD.Module.NairrReports, XDMoD.PortalModule, {
 
     const now = new Date();
     let hashParams = getHashParams();
-    const defaultYear = hashParams.year || now.getFullYear();
+    const prevMonth = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+    const defaultYear = hashParams.year || prevMonth.getFullYear();
     const defaultMonth =
-      hashParams.month || now.toLocaleString("default", { month: "long" });
+      hashParams.month ||
+      prevMonth.toLocaleString("default", { month: "long" });
     let pendingReportId = hashParams.report_id || null;
     const initialUrl = buildReportUrl(defaultYear, defaultMonth);
 
