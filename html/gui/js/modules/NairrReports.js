@@ -40,25 +40,69 @@ Ext.extend(XDMoD.Module.NairrReports, XDMoD.PortalModule, {
         `/custom_reports/reports?year=${encodeURIComponent(year)}&month=${encodeURIComponent(month)}`,
       );
     }
+    function formatReportTitle(reportId) {
+      const parts = reportId.split("_");
+      const params = getHashParams();
+      // Get year and month from the end
 
+      // Remaining parts are the report title
+      let titleParts = parts.slice(0, parts.length - 2);
+
+      // Remove version like "v2"
+      titleParts = titleParts.filter((p) => !/^v\d+$/i.test(p));
+
+      // Capitalize first 2 words fully, rest normally
+      const formattedTitle = titleParts
+        .map((p, idx) => {
+          if (idx < 2) return p.toUpperCase(); // first two words fully uppercase
+          return p.charAt(0).toUpperCase() + p.slice(1).toLowerCase();
+        })
+        .join(" ");
+
+      return `${params.month}, ${params.year} ${formattedTitle}`;
+    }
     function triggerReportDownload(reportId, year, month) {
       const qs = [];
       if (year) qs.push(`year=${encodeURIComponent(year)}`);
       if (month) qs.push(`month=${encodeURIComponent(month)}`);
-      const url = `${XDMoD.REST.prependPathBase("/custom_reports/report/")}${reportId}${qs.length ? "?" + qs.join("&") : ""}`;
+
+      const url = `${XDMoD.REST.prependPathBase(
+        "/custom_reports/report/",
+      )}${reportId}${qs.length ? "?" + qs.join("&") : ""}`;
+
       let iframe = document.getElementById("nairr_report_download_iframe");
+
       if (!iframe) {
         iframe = document.createElement("iframe");
         iframe.style.display = "none";
         iframe.id = "nairr_report_download_iframe";
         document.body.appendChild(iframe);
       }
+
       iframe.src = url;
     }
+    function showReportPreview(reportId, year, month) {
+      const qs = [];
+      if (year) qs.push(`year=${encodeURIComponent(year)}`);
+      if (month) qs.push(`month=${encodeURIComponent(month)}`);
+      qs.push("view=inline");
+      const url = `${XDMoD.REST.prependPathBase(
+        "/custom_reports/report/",
+      )}${reportId}${qs.length ? "?" + qs.join("&") : ""}`;
 
+      mainArea.getLayout().setActiveItem(previewPanel);
+      mainArea.setTitle(formatReportTitle(reportId) + " Preview");
+
+      previewPanel.body.update(
+        '<iframe src="' +
+          url +
+          '" frameborder="0" style="display:block;width:100%;height:100%;"></iframe>',
+      );
+    }
     function getHashParams() {
       const hash = window.location.hash.split("?")[1] || "";
       const params = new URLSearchParams(hash);
+
       return {
         year: params.get("year"),
         month: params.get("month"),
@@ -68,35 +112,47 @@ Ext.extend(XDMoD.Module.NairrReports, XDMoD.PortalModule, {
 
     function setHashParams(obj) {
       window._tabHashParams[TAB_ID] = obj;
+
       const pre =
         window.location.hash.split("?")[0] || `#main_tab_panel:${TAB_ID}`;
+
       const params = new URLSearchParams();
+
       if (obj.year) params.set("year", obj.year);
       if (obj.month) params.set("month", obj.month);
       if (obj.report_id) params.set("report_id", obj.report_id);
+
       window.location.hash = `${pre}?${params.toString()}`;
     }
 
     const now = new Date();
     let hashParams = getHashParams();
+
     const prevMonth = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+
     const defaultYear = hashParams.year || prevMonth.getFullYear();
+
     const defaultMonth =
       hashParams.month ||
       prevMonth.toLocaleString("default", { month: "long" });
+
     let pendingReportId = hashParams.report_id || null;
+
     const initialUrl = buildReportUrl(defaultYear, defaultMonth);
 
     if (!window._nairrReportsHashHandler) {
       window._nairrReportsHashHandler = true;
+
       window.addEventListener("hashchange", function () {
         let tabPanel = Ext.getCmp("main_tab_panel");
         let activeTab = tabPanel ? tabPanel.getActiveTab() : null;
+
         if (
           activeTab &&
           (activeTab.id === TAB_ID || activeTab.module_id === TAB_ID)
         ) {
           const params = getHashParams();
+
           if (params.year && params.month) {
             loadReportsAsync(params.year, params.month, params.report_id);
           }
@@ -106,23 +162,34 @@ Ext.extend(XDMoD.Module.NairrReports, XDMoD.PortalModule, {
 
     function getCustomReportQueryString() {
       let hashParams = getHashParams();
+
       const year = hashParams.year || defaultYear;
       const month = hashParams.month || defaultMonth;
+
       const out = [];
+
       if (year) out.push(`year=${encodeURIComponent(year)}`);
       if (month) out.push(`month=${encodeURIComponent(month)}`);
+
       return out.length ? "?" + out.join("&") : "";
     }
 
     function expandAndSelect(tree, year, month, clickNode) {
       const yearNode = tree.getRootNode().findChild("text", String(year));
+
       if (!yearNode) return;
+
       yearNode.expand(false, false, function () {
         const monthNode = yearNode.findChild("text", String(month));
+
         if (!monthNode) return;
+
         tree.getSelectionModel().select(monthNode);
         monthNode.ensureVisible();
-        if (clickNode) monthNode.fireEvent("click", monthNode);
+
+        if (clickNode) {
+          monthNode.fireEvent("click", monthNode);
+        }
       });
     }
 
@@ -135,44 +202,64 @@ Ext.extend(XDMoD.Module.NairrReports, XDMoD.PortalModule, {
         reportContainer.body.unmask();
         return;
       }
-      lastLoaded = { year, month, report_id: report_id || null };
+
+      lastLoaded = {
+        year,
+        month,
+        report_id: report_id || null,
+      };
 
       if (!year || !month) return;
+
       pendingReportId = report_id || null;
+
       reportStore.proxy.conn.url = buildReportUrl(year, month);
+
       reportStore.load({
         callback: function (records, op, success) {
           mainArea.setTitle(`NAIRR Reports for ${month} ${year}`);
+
           reportContainer.body.unmask();
+
           if (!success) {
             reportContainer.body.update(`
               <div class="no-reports-container">
                 <div class="no-reports-icon">&#9888;</div>
-                <div class="no-reports-title">Failed to load reports. Please try again.</div>
+                <div class="no-reports-title">
+                  Failed to load reports. Please try again.
+                </div>
               </div>
             `);
             return;
           }
+
           if (!records || records.length === 0) {
             reportContainer.body.update(`
               <div class="no-reports-container">
                 <div class="no-reports-icon">&#9888;</div>
-                <div class="no-reports-title">No reports available.</div>
+                <div class="no-reports-title">
+                  No reports available.
+                </div>
               </div>
             `);
             return;
           }
+
           reportContainer.updateReports(records);
 
           if (pendingReportId) {
             const matching = records.find(
               (r) => r.data.name === pendingReportId,
             );
+
             if (matching) {
               triggerReportDownload(pendingReportId, year, month);
+
               pendingReportId = null;
+
               let hashParams = getHashParams();
               delete hashParams.report_id;
+
               setHashParams(hashParams);
             }
           }
@@ -187,7 +274,10 @@ Ext.extend(XDMoD.Module.NairrReports, XDMoD.PortalModule, {
       root: "report_list",
       idProperty: "name",
       fields: ["name", "version", "title", "description", "timestamp"],
-      proxy: new Ext.data.HttpProxy({ url: initialUrl, method: "GET" }),
+      proxy: new Ext.data.HttpProxy({
+        url: initialUrl,
+        method: "GET",
+      }),
     });
 
     const reportContainer = new Ext.Panel({
@@ -196,48 +286,86 @@ Ext.extend(XDMoD.Module.NairrReports, XDMoD.PortalModule, {
       autoScroll: true,
       region: "center",
       items: [],
+
       updateReports: function (records) {
         this.removeAll(true);
+
         if (!records || records.length === 0) {
           this.body.update(`
             <div class="no-reports-container">
               <div class="no-reports-icon">&#9888;</div>
-              <div class="no-reports-title">No reports available.</div>
+              <div class="no-reports-title">
+                No reports available.
+              </div>
             </div>
           `);
           return;
         }
+
         this.body.update("");
+
         Ext.each(records, function (record) {
           const report = record.data;
+
+          var btnDownloadReport = new Ext.Button({
+            text: "Download",
+            iconCls: "btn_download",
+            tooltip: "Download Selected Report",
+            handler: function () {
+              const params = getHashParams();
+
+              triggerReportDownload(report.name, params.year, params.month);
+            },
+          });
+          var btnViewReport = new Ext.Button({
+            iconCls: "btn_preview",
+            text: "Preview",
+            tooltip: "See a visual representation of the selected report.",
+            handler: function () {
+              const params = getHashParams();
+              showReportPreview(report.name, params.year, params.month);
+            },
+          });
           const panel = new Ext.Panel({
             title: report.title,
             cls: "custom-report-panel",
+
+            tbar: {
+              items: [btnDownloadReport, btnViewReport],
+            },
+
             html: `
               <div class="custom-report-thumb-wrap" id="${report.name}">
                 <div class="custom-report-thumb">
-                  <img src="${XDMoD.REST.prependPathBase("/custom_reports/thumbnail/")}${report.name}${getCustomReportQueryString()}"
-                       title="${report.name}" />
+                  <img
+                    src="${XDMoD.REST.prependPathBase(
+                      "/custom_reports/thumbnail/",
+                    )}${report.name}${getCustomReportQueryString()}"
+                    title="${report.name}"
+                  />
                 </div>
                 <div class="custom-report-thumb-desc">
-                  <h2 class="custom-report-thumb-title">${report.title}</h2>
+                  <h2 class="custom-report-thumb-title">
+                    ${report.title}
+                  </h2>
                   <p>Version: ${report.version}</p>
                   <p>${report.description}</p>
                   <p>Created At ${report.timestamp}</p>
-                  <div>
-                    <p><a href="${XDMoD.REST.prependPathBase("/custom_reports/report/")}${report.name}${getCustomReportQueryString()}" name="${report.name}">Download</a></p>
-                  </div>
                 </div>
               </div>
             `,
+
             listeners: {
               afterrender: function (p) {
                 p.body.mask("Loading...");
+
                 const img = p.body.dom.querySelector("img");
+
                 if (img) {
                   img.onload = function () {
                     p.body.unmask();
                   };
+
                   img.onerror = function () {
                     p.body.unmask();
                   };
@@ -247,18 +375,49 @@ Ext.extend(XDMoD.Module.NairrReports, XDMoD.PortalModule, {
               },
             },
           });
+
           reportContainer.add(panel);
         });
+
         this.doLayout();
       },
     });
 
+    const btnGoBack = new Ext.Button({
+      iconCls: "btn_return_to_previous",
+      text: "Go Back",
+      tooltip: "Go back to previous reports",
+      handler: function () {
+        const params = getHashParams();
+        mainArea.getLayout().setActiveItem(reportContainer);
+        mainArea.setTitle(
+          "NAIRR Reports for " + params.month + " " + params.year,
+        );
+      },
+    });
+
+    const previewPanel = new Ext.Panel({
+      id: "nairr_report_preview_panel",
+      region: "center",
+      layout: "fit",
+      autoScroll: false,
+      html: "",
+      tbar: {
+        items: [btnGoBack],
+      },
+      listeners: {
+        afterrender: function (p) {
+          p.body.setStyle("overflow", "hidden");
+        },
+      },
+    });
     const mainArea = new Ext.Panel({
       id: "nairr_reports_main_panel",
       title: `NAIRR Reports for ${defaultMonth} ${defaultYear}`,
       region: "center",
-      layout: "fit",
-      items: [reportContainer],
+      layout: "card",
+      activeItem: 0,
+      items: [reportContainer, previewPanel],
     });
 
     const leftPanel = new Ext.tree.TreePanel({
@@ -267,22 +426,33 @@ Ext.extend(XDMoD.Module.NairrReports, XDMoD.PortalModule, {
       collapsible: true,
       title: "Report Directory",
       rootVisible: false,
+
       loader: new Ext.tree.TreeLoader({
         dataUrl: XDMoD.REST.prependPathBase("/custom_reports/report-directory"),
         requestMethod: "GET",
       }),
-      root: new Ext.tree.AsyncTreeNode({ text: "Reports", expanded: true }),
+
+      root: new Ext.tree.AsyncTreeNode({
+        text: "Reports",
+        expanded: true,
+      }),
+
       listeners: {
         click: function (node) {
           if (!node.isLeaf()) return;
+
           let year = node.parentNode.text;
           let month = node.text;
+
           setHashParams({ year, month });
+          mainArea.getLayout().setActiveItem(reportContainer);
         },
+
         render: function (tree) {
           tree.getLoader().on("load", function (loader, node) {
             if (node.isRoot) {
               let hashParams = getHashParams();
+
               expandAndSelect(
                 tree,
                 hashParams.year || defaultYear,
@@ -298,22 +468,30 @@ Ext.extend(XDMoD.Module.NairrReports, XDMoD.PortalModule, {
     Ext.apply(this, {
       layout: "border",
       items: [leftPanel, mainArea],
+
       listeners: {
         activate: function () {
           let params = getHashParams();
-          const now = new Date();
+
           if (!params.year && !params.month && window._tabHashParams[TAB_ID]) {
             params = window._tabHashParams[TAB_ID];
             setHashParams(params);
             return;
           }
+
           if (!params.year && !params.month) {
-            setHashParams({ year: defaultYear, month: defaultMonth });
+            setHashParams({
+              year: defaultYear,
+              month: defaultMonth,
+            });
             return;
           }
+
           if (params.year && params.month) {
             expandAndSelect(leftPanel, params.year, params.month, false);
+
             reportContainer.body.mask("Loading...");
+
             loadReportsAsync(params.year, params.month, params.report_id);
           }
         },
