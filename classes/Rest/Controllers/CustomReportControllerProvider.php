@@ -123,38 +123,41 @@ class CustomReportControllerProvider extends BaseControllerProvider
 	 */
 	public function getReport(Request $request, Application $app, string $report_id)
 	{
+    	$user = $this->authorize($request, array("acl.nairr-reports"));
 
-		$user = $this->authorize($request, array("acl.nairr-reports"));
+    	list($base_path, $report_config) = $this->getConfiguration(
+        	$request->get('month', null),
+        	$request->get('year', null)
+    	);
 
+    	$user_id = $user->getUserID();
+    	$is_viewable = $this->isViewable($report_id, $user_id);
 
-		list($base_path, $report_config) = $this->getConfiguration(
-			$request->get('month', null),
-			$request->get('year', null)
-		);
+    	if (!$is_viewable) {
+        	throw new NotFoundHttpException('You do not have permission to view this report');
+    	}
 
-		$user_id = $user->getUserID();
-		$is_viewable = $this->isViewable($report_id, $user_id);
-		if (!$is_viewable) {
-			throw new NotFoundHttpException('You do not have permission to view this report');
-		}
+    	if (isset($report_config[$report_id])) {
 
+        	$filename = $report_config[$report_id]['filename'];
 
+        	$isInline = $request->get('view') === 'inline';
 
-		if (isset($report_config[$report_id])) {
-			return $app->sendFile(
-				$base_path . '/' . $report_config[$report_id]['filename'],
-				200,
-				[
-					'Content-type' => 'text/html',
-					'Content-Disposition' => sprintf(
-						'attachment; filename="%s"',
-						$report_config[$report_id]['filename']
-					)
-				]
-			);
-		}
+        	return $app->sendFile(
+            	$base_path . '/' . $filename,
+            	200,
+            	[
+                	'Content-type' => 'text/html',
+                	'Content-Disposition' => sprintf(
+                    	'%s; filename="%s"',
+                    	$isInline ? 'inline' : 'attachment',
+                    	$filename
+                	)
+            	]
+        	);
+    	}
 
-		throw new NotFoundHttpException('Report does not exist');
+    	throw new NotFoundHttpException('Report does not exist');
 	}
 
 
