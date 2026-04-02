@@ -92,7 +92,7 @@ Ext.extend(XDMoD.Module.NairrReports, XDMoD.PortalModule, {
 
       mainArea.getLayout().setActiveItem(previewPanel);
       mainArea.setTitle(formatReportTitle(reportId) + " Preview");
-
+      previewPanel.reportId = reportId;
       previewPanel.body.update(
         '<iframe src="' +
           url +
@@ -385,7 +385,7 @@ Ext.extend(XDMoD.Module.NairrReports, XDMoD.PortalModule, {
 
     const btnGoBack = new Ext.Button({
       iconCls: "btn_return_to_previous",
-      text: "Go Back",
+      text: "Go Back NAIRR Reports",
       tooltip: "Go back to previous reports",
       handler: function () {
         const params = getHashParams();
@@ -395,15 +395,25 @@ Ext.extend(XDMoD.Module.NairrReports, XDMoD.PortalModule, {
         );
       },
     });
+    const btnDownload = new Ext.Button({
+      text: "Download",
+      iconCls: "btn_download",
+      tooltip: "Download Selected Report",
+      handler: function () {
+        const params = getHashParams();
 
+        triggerReportDownload(previewPanel.reportId, params.year, params.month);
+      },
+    });
     const previewPanel = new Ext.Panel({
       id: "nairr_report_preview_panel",
       region: "center",
       layout: "fit",
       autoScroll: false,
       html: "",
+      reportId: null, // define it here
       tbar: {
-        items: [btnGoBack],
+        items: [btnDownload, "->", btnGoBack],
       },
       listeners: {
         afterrender: function (p) {
