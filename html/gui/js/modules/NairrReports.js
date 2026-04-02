@@ -2,7 +2,7 @@
  * NAIRR Reports Module for XDMoD Portal
  * @author Alex Tovar (rvtovar)
  * @date 2025-10-08
- *
+ * @updateDate 2026-04-02
  * Overview:
  * This module adds a user interface to the XDMoD Portal for browsing and downloading
  * custom NAIRR reports. It leverages Ext JS 3.4.x idioms and XDMoD's portal conventions.
@@ -13,6 +13,7 @@
  * - Handles tab activation, tree expansion, and async report loading using Ext JS best practices.
  * - Ensures robust UI masking/unmasking and avoids redundant network loads.
  * - All tab/hash management is keyed by the configured tab ID.
+ * - Viewing reports within tab and downloaded from tbar
  *
  * Usage:
  * - Add this module to the XDMoD Portal config.
