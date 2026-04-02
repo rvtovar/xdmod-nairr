@@ -212,7 +212,21 @@ Ext.extend(XDMoD.Module.NairrReports, XDMoD.PortalModule, {
         }
       });
     }
+    function createDownloadButton(getReportIdFn) {
+      return new Ext.Button({
+        text: "Download",
+        iconCls: "btn_download",
+        tooltip: "Download Selected Report",
+        handler: function () {
+          var p = getHashParams();
+          var reportId = getReportIdFn();
 
+          if (!reportId) return;
+
+          triggerReportDownload(reportId, p.year, p.month);
+        },
+      });
+    }
     function loadReportsAsync(year, month, report_id) {
       if (
         lastLoaded.year === year &&
@@ -309,16 +323,6 @@ Ext.extend(XDMoD.Module.NairrReports, XDMoD.PortalModule, {
         Ext.each(records, function (record) {
           const report = record.data;
 
-          var btnDownloadReport = new Ext.Button({
-            text: "Download",
-            iconCls: "btn_download",
-            tooltip: "Download Selected Report",
-            handler: function () {
-              var p = getHashParams();
-
-              triggerReportDownload(report.name, p.year, p.month);
-            },
-          });
           var btnViewReport = new Ext.Button({
             iconCls: "btn_preview",
             text: "Preview",
@@ -333,7 +337,12 @@ Ext.extend(XDMoD.Module.NairrReports, XDMoD.PortalModule, {
             cls: "custom-report-panel",
 
             tbar: {
-              items: [btnDownloadReport, btnViewReport],
+              items: [
+                createDownloadButton(function () {
+                  return report.name;
+                }),
+                btnViewReport,
+              ],
             },
 
             html: `
@@ -395,25 +404,21 @@ Ext.extend(XDMoD.Module.NairrReports, XDMoD.PortalModule, {
         mainArea.setTitle("NAIRR Reports for " + p.month + " " + p.year);
       },
     });
-    const btnDownload = new Ext.Button({
-      text: "Download",
-      iconCls: "btn_download",
-      tooltip: "Download Selected Report",
-      handler: function () {
-        var p = getHashParams();
 
-        triggerReportDownload(previewPanel.reportId, p.year, p.month);
-      },
-    });
     const previewPanel = new Ext.Panel({
       id: "nairr_report_preview_panel",
       region: "center",
       layout: "fit",
       autoScroll: false,
       html: "",
-      reportId: null, // define it here
       tbar: {
-        items: [btnDownload, "->", btnGoBack],
+        items: [
+          createDownloadButton(function () {
+            return previewPanel.reportId;
+          }),
+          "->",
+          btnGoBack,
+        ],
       },
       listeners: {
         afterrender: function (p) {
