@@ -3,7 +3,9 @@
     "name": "Cloud Provider",
     "description_html": "A provider of cloud services, e.g. Amazon Web Services (AWS), Microsoft Azure, Google Cloud Platform (GCP).",
     "attribute_table_schema": "modw_public_cloud",
-    "alternate_group_by_columns": ["cloud_provider_id"],
+    "alternate_group_by_columns": [
+      "cloud_provider_id"
+    ],
     "attribute_to_aggregate_table_key_map": [
       {
         "cloud_provider_id": "cloud_provider_id"
@@ -21,7 +23,9 @@
           "name": "cloud_providers"
         }
       ],
-      "orderby": ["cloud_provider_id"],
+      "orderby": [
+        "cloud_provider_id"
+      ],
       "query_hint": "DISTINCT"
     },
     "attribute_filter_map_query": {
@@ -33,7 +37,9 @@
     "name": "Cloud Location",
     "description_html": "The geographical location where cloud providers cluster data centers to provide services.",
     "attribute_table_schema": "modw_public_cloud",
-    "alternate_group_by_columns": ["location_id"],
+    "alternate_group_by_columns": [
+      "location_id"
+    ],
     "attribute_to_aggregate_table_key_map": [
       {
         "location_id": "location_id"
@@ -51,7 +57,9 @@
           "name": "locations"
         }
       ],
-      "orderby": ["location_id"],
+      "orderby": [
+        "location_id"
+      ],
       "query_hint": "DISTINCT"
     },
     "attribute_filter_map_query": {
@@ -63,7 +71,9 @@
     "name": "Cloud Service",
     "description_html": "The particular cloud provider service on which funds spent money.",
     "attribute_table_schema": "modw_public_cloud",
-    "alternate_group_by_columns": ["service_id"],
+    "alternate_group_by_columns": [
+      "service_id"
+    ],
     "attribute_to_aggregate_table_key_map": [
       {
         "service_id": "service_id"
@@ -81,7 +91,9 @@
           "name": "services"
         }
       ],
-      "orderby": ["service_id"],
+      "orderby": [
+        "service_id"
+      ],
       "query_hint": "DISTINCT"
     },
     "attribute_filter_map_query": {
@@ -93,7 +105,9 @@
     "name": "Cloud Sub-Service",
     "description_html": "Within each cloud service there may be one or more sub-services that are charged at different rates (e.g., when using AWS's EC2 service, in addition to being charged for instance time, you are also charged for data transfer, file storage etc. These are seen as sub-services of the EC2 service).",
     "attribute_table_schema": "modw_public_cloud",
-    "alternate_group_by_columns": ["sub_service_id"],
+    "alternate_group_by_columns": [
+      "sub_service_id"
+    ],
     "attribute_to_aggregate_table_key_map": [
       {
         "sub_service_id": "sub_service_id"
@@ -111,7 +125,9 @@
           "name": "sub_services"
         }
       ],
-      "orderby": ["sub_service_id"],
+      "orderby": [
+        "sub_service_id"
+      ],
       "query_hint": "DISTINCT"
     },
     "attribute_filter_map_query": {
@@ -121,6 +137,12 @@
   },
   "cb_fund": {
     "$ref": "datawarehouse.d/ref/CloudBank-group-by-common.json#/cb_fund"
+  },
+  "cb_fund_allocation_type": {
+    "$overwrite": {
+      "description_html": "The allocation type of the fund that could have spent money on public cloud services. Money is deposited into a fund from which it is dispersed to cloud provider accounts to cover charges for usage."
+    },
+    "$ref-with-overwrite": "datawarehouse.d/ref/CloudBank-group-by-common.json#/cb_fund_allocation_type"
   },
   "cb_funder": {
     "$ref": "datawarehouse.d/ref/CloudBank-group-by-common.json#/cb_funder"
@@ -165,7 +187,9 @@
     "name": "Cloud Provider Account",
     "description_html": "A cloud provider specific financial account that is charged for usage.",
     "attribute_table_schema": "modw_public_cloud",
-    "alternate_group_by_columns": ["account_id"],
+    "alternate_group_by_columns": [
+      "account_id"
+    ],
     "attribute_to_aggregate_table_key_map": [
       {
         "account_id": "account_id"
@@ -183,7 +207,9 @@
           "name": "accounts"
         }
       ],
-      "orderby": ["account_id"],
+      "orderby": [
+        "account_id"
+      ],
       "query_hint": "DISTINCT"
     },
     "attribute_filter_map_query": {

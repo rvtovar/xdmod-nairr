@@ -19,15 +19,15 @@
         "comment": "External ID"
       },
       {
+        "name": "funder_id",
+        "type": "int(11)",
+        "nullable": false
+      },
+      {
         "name": "project_id",
         "type": "varchar(32)",
         "nullable": false,
         "comment": "NAIRR Project Identifier"
-      },
-      {
-        "name": "funder_id",
-        "type": "int(11)",
-        "nullable": false
       },
       {
         "name": "nsf_directorate_id",
@@ -42,8 +42,12 @@
       {
         "name": "field_of_science_id",
         "type": "int(11)",
-        "nullable": false,
-        "default": -1
+        "nullable": false
+      },
+      {
+        "name": "allocation_type_id",
+        "type": "int(11)",
+        "nullable": false
       },
       {
         "name": "title",
@@ -71,6 +75,30 @@
         "nullable": false
       },
       {
+        "name": "cash_deposited",
+        "type": "decimal(15,10)",
+        "nullable": false,
+        "default": 0.0
+      },
+      {
+        "name": "cash_spend",
+        "type": "decimal(15,10)",
+        "nullable": false,
+        "default": 0.0
+      },
+      {
+        "name": "credit_deposited",
+        "type": "decimal(15,10)",
+        "nullable": false,
+        "default": 0.0
+      },
+      {
+        "name": "credit_spend",
+        "type": "decimal(15,10)",
+        "nullable": false,
+        "default": 0.0
+      },
+      {
         "name": "created",
         "type": "datetime",
         "nullable": false,
@@ -87,57 +115,102 @@
     "indexes": [
       {
         "name": "PRIMARY",
-        "columns": ["fund_id"]
+        "columns": [
+          "fund_id"
+        ]
       },
       {
         "name": "idx_funds_funder_id",
-        "columns": ["funder_id"]
+        "columns": [
+          "funder_id"
+        ]
       },
       {
         "name": "idx_funds_nsf_directorate_id",
-        "columns": ["nsf_directorate_id"]
+        "columns": [
+          "nsf_directorate_id"
+        ]
       },
       {
         "name": "idx_funds_nsf_division_id",
-        "columns": ["nsf_division_id"]
+        "columns": [
+          "nsf_division_id"
+        ]
       },
       {
         "name": "idx_id",
-        "columns": ["id"],
+        "columns": [
+          "id"
+        ],
         "is_unique": true
       },
       {
         "name": "idx_field_of_science_id",
-        "columns": ["field_of_science_id"]
+        "columns": [
+          "field_of_science_id"
+        ]
+      },
+      {
+        "name": "idx_allocation_type_id",
+        "columns": [
+          "allocation_type_id"
+        ]
       }
     ],
     "foreign_key_constraints": [
       {
         "name": "fk_fund_funder_id",
-        "columns": ["funder_id"],
+        "columns": [
+          "funder_id"
+        ],
         "referenced_table": "funders",
-        "referenced_columns": ["funder_id"],
+        "referenced_columns": [
+          "funder_id"
+        ],
         "on_delete": "CASCADE"
       },
       {
         "name": "fk_fund_nsf_directorate_id",
-        "columns": ["nsf_directorate_id"],
+        "columns": [
+          "nsf_directorate_id"
+        ],
         "referenced_table": "nsf_directorates",
-        "referenced_columns": ["nsf_directorate_id"],
+        "referenced_columns": [
+          "nsf_directorate_id"
+        ],
         "on_delete": "CASCADE"
       },
       {
         "name": "fk_fund_nsf_division_id",
-        "columns": ["nsf_division_id"],
+        "columns": [
+          "nsf_division_id"
+        ],
         "referenced_table": "nsf_divisions",
-        "referenced_columns": ["nsf_division_id"],
+        "referenced_columns": [
+          "nsf_division_id"
+        ],
         "on_delete": "CASCADE"
       },
       {
         "name": "fk_fund_field_of_science_id",
-        "columns": ["field_of_science_id"],
+        "columns": [
+          "field_of_science_id"
+        ],
         "referenced_table": "fields_of_science",
-        "referenced_columns": ["field_of_science_id"],
+        "referenced_columns": [
+          "field_of_science_id"
+        ],
+        "on_delete": "CASCADE"
+      },
+      {
+        "name": "fk_allocation_type_id",
+        "columns": [
+          "allocation_type_id"
+        ],
+        "referenced_table": "allocation_types",
+        "referenced_columns": [
+          "allocation_type_id"
+        ],
         "on_delete": "CASCADE"
       }
     ]

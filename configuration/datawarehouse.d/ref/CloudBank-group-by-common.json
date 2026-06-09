@@ -20,13 +20,46 @@
           "name": "funds"
         }
       ],
-      "orderby": ["fund_id"],
+      "orderby": [
+        "fund_id"
+      ],
       "query_hint": "DISTINCT"
     },
     "attribute_filter_map_query": {
       "fund_id": "SELECT fund_id FROM modw_public_cloud.funds WHERE fund_id IN (__filter_values__)"
     },
     "attribute_description_query": "SELECT DISTINCT title AS filter_name FROM modw_public_cloud.funds WHERE fund_id IN (__filter_values__) ORDER BY title"
+  },
+  "cb_fund_allocation_type": {
+    "name": "Fund Allocation Type",
+    "description_html": "The fund that spent money on public cloud services. Money is deposited into a fund from which it is dispersed to cloud provider accounts to cover charges for usage.",
+    "attribute_table_schema": "modw_public_cloud",
+    "attribute_to_aggregate_table_key_map": [
+      {
+        "allocation_type_id": "allocation_type_id"
+      }
+    ],
+    "attribute_values_query": {
+      "records": {
+        "id": "allocation_type_id",
+        "short_name": "display",
+        "name": "display",
+        "order_id": "allocation_type_id"
+      },
+      "joins": [
+        {
+          "name": "allocation_types"
+        }
+      ],
+      "orderby": [
+        "allocation_type_id"
+      ],
+      "query_hint": "DISTINCT"
+    },
+    "attribute_filter_map_query": {
+      "fund_id": "SELECT allocation_type_id FROM modw_public_cloud.allocation_types WHERE allocation_type_id IN (__filter_values__)"
+    },
+    "attribute_description_query": "SELECT DISTINCT display AS filter_name FROM modw_public_cloud.allocation_types WHERE allocation_type_id IN (__filter_values__) ORDER BY display"
   },
   "cb_funder": {
     "name": "Funding Source",
@@ -49,7 +82,9 @@
           "name": "funders"
         }
       ],
-      "orderby": ["funder_id"],
+      "orderby": [
+        "funder_id"
+      ],
       "query_hint": "DISTINCT"
     },
     "attribute_filter_map_query": {
@@ -78,7 +113,10 @@
           "name": "persons"
         }
       ],
-      "orderby": ["persons.full_name", "persons.person_id"],
+      "orderby": [
+        "persons.full_name",
+        "persons.person_id"
+      ],
       "query_hint": "DISTINCT"
     },
     "attribute_filter_map_query": {
@@ -107,7 +145,10 @@
           "name": "institutions"
         }
       ],
-      "orderby": ["institutions.name", "institutions.institution_id"],
+      "orderby": [
+        "institutions.name",
+        "institutions.institution_id"
+      ],
       "query_hint": "DISTINCT"
     },
     "attribute_filter_map_query": {
@@ -136,7 +177,10 @@
           "name": "carnegie_classifications"
         }
       ],
-      "orderby": ["name", "carnegie_classification_id"],
+      "orderby": [
+        "name",
+        "carnegie_classification_id"
+      ],
       "query_hint": "DISTINCT"
     },
     "attribute_filter_map_query": {
@@ -165,7 +209,10 @@
           "name": "carnegie_research_designations"
         }
       ],
-      "orderby": ["name", "carnegie_research_designation_id"],
+      "orderby": [
+        "name",
+        "carnegie_research_designation_id"
+      ],
       "query_hint": "DISTINCT"
     },
     "attribute_filter_map_query": {
@@ -194,7 +241,10 @@
           "name": "epscor"
         }
       ],
-      "orderby": ["name", "epscor_id"],
+      "orderby": [
+        "name",
+        "epscor_id"
+      ],
       "query_hint": "DISTINCT"
     },
     "attribute_filter_map_query": {
@@ -223,7 +273,10 @@
           "name": "cities"
         }
       ],
-      "orderby": ["name", "city_id"],
+      "orderby": [
+        "name",
+        "city_id"
+      ],
       "query_hint": "DISTINCT"
     },
     "attribute_filter_map_query": {
@@ -252,7 +305,10 @@
           "name": "states"
         }
       ],
-      "orderby": ["name", "state_id"],
+      "orderby": [
+        "name",
+        "state_id"
+      ],
       "query_hint": "DISTINCT"
     },
     "attribute_filter_map_query": {
@@ -281,7 +337,10 @@
           "name": "countries"
         }
       ],
-      "orderby": ["name", "country_id"],
+      "orderby": [
+        "name",
+        "country_id"
+      ],
       "query_hint": "DISTINCT"
     },
     "attribute_filter_map_query": {
@@ -310,7 +369,10 @@
           "name": "nsf_directorates"
         }
       ],
-      "orderby": ["name", "nsf_directorate_id"],
+      "orderby": [
+        "name",
+        "nsf_directorate_id"
+      ],
       "query_hint": "DISTINCT"
     },
     "attribute_filter_map_query": {
@@ -339,7 +401,10 @@
           "name": "nsf_divisions"
         }
       ],
-      "orderby": ["name", "nsf_division_id"],
+      "orderby": [
+        "name",
+        "nsf_division_id"
+      ],
       "query_hint": "DISTINCT"
     },
     "attribute_filter_map_query": {
@@ -368,7 +433,10 @@
           "name": "fields_of_science"
         }
       ],
-      "orderby": ["name", "field_of_science_id"],
+      "orderby": [
+        "name",
+        "field_of_science_id"
+      ],
       "query_hint": "DISTINCT"
     },
     "attribute_filter_map_query": {
@@ -380,7 +448,9 @@
     "name": "NAIRR Project",
     "description_html": "The NAIRR Project associated with the cloudbank fund.",
     "attribute_table_schema": "modw_public_cloud",
-    "alternate_group_by_columns": ["fund_id"],
+    "alternate_group_by_columns": [
+      "fund_id"
+    ],
     "attribute_to_aggregate_table_key_map": [
       {
         "fund_id": "fund_id"
@@ -398,7 +468,9 @@
           "name": "funds"
         }
       ],
-      "orderby": ["fund_id"],
+      "orderby": [
+        "fund_id"
+      ],
       "query_hint": "DISTINCT"
     },
     "attribute_filter_map_query": {

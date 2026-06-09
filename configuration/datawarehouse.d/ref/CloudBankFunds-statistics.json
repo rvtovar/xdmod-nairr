@@ -5,5 +5,33 @@
     "name": "Number of Funds: Active",
     "precision": 0,
     "unit": "Funds"
+  },
+  "cb_avg_cash_deposited": {
+    "description_html": "The total number of funds that could have spent money on public cloud services.",
+    "formula": "avg_cash_deposited",
+    "name": "Average: Cash Desposited",
+    "precision": 0,
+    "unit": "Dollars"
+  },
+  "cb_avg_cash_spend": {
+    "description_html": "The total number of funds that could have spent money on public cloud services.",
+    "formula": "avg_cash_spend",
+    "name": "Average: Cash Spend",
+    "precision": 0,
+    "unit": "Dollars"
+  },
+  "cb_avg_credit_deposited": {
+    "description_html": "The total number of funds that could have spent money on public cloud services.",
+    "formula": "avg_credit_deposited",
+    "name": "Average: Credit Deposited",
+    "precision": 0,
+    "unit": "Dollars"
+  },
+  "cb_avg_credit_spend": {
+    "description_html": "The total number of funds that could have spent money on public cloud services.",
+    "formula": "avg_credit_spend",
+    "name": "Average: Credit Spend",
+    "precision": 0,
+    "unit": "Dollars"
   }
 }

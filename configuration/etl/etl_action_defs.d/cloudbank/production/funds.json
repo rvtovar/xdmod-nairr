@@ -11,11 +11,16 @@
       "nsf_directorate_id": "nd.nsf_directorate_id",
       "nsf_division_id": "dv.nsf_division_id",
       "field_of_science_id": "COALESCE(fos.field_of_science_id, -1)",
+      "allocation_type_id": "at.allocation_type_id",
       "title": "CONCAT(sf.id, ' ', sf.title)",
       "start_date": "sf.start_date",
       "end_date": "sf.end_date",
       "start_day_id": "YEAR(sf.start_date) * 100000 + DAYOFYEAR(sf.start_date)",
-      "end_day_id": "YEAR(sf.end_date) * 100000 + DAYOFYEAR(sf.end_date)"
+      "end_day_id": "YEAR(sf.end_date) * 100000 + DAYOFYEAR(sf.end_date)",
+      "cash_deposited": "sf.cash_deposited",
+      "cash_spend": "sf.cash_spend",
+      "credit_deposited": "sf.credit_deposited",
+      "credit_spend": "sf.credit_spend"
     },
     "joins": [
       {
@@ -53,6 +58,12 @@
         "alias": "fos",
         "on": "sf.field_of_science = fos.name",
         "type": "LEFT"
+      },
+      {
+        "name": "allocation_types",
+        "schema": "${SOURCE_SCHEMA}",
+        "alias": "at",
+        "on": "at.name = sf.allocation_type"
       }
     ]
   }

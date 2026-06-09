@@ -5,6 +5,12 @@
     },
     "$ref-with-overwrite": "datawarehouse.d/ref/CloudBank-group-by-common.json#/cb_fund"
   },
+  "cb_fund_allocation_type": {
+    "$overwrite": {
+      "description_html": "The allocation type of the fund that could have spent money on public cloud services. Money is deposited into a fund from which it is dispersed to cloud provider accounts to cover charges for usage."
+    },
+    "$ref-with-overwrite": "datawarehouse.d/ref/CloudBank-group-by-common.json#/cb_fund_allocation_type"
+  },
   "cb_funder": {
     "$overwrite": {
       "description_html": "The funding source that awarded the fund(s) that could have spent money on public cloud services."
