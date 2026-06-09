@@ -2,7 +2,7 @@
  * NAIRR Reports Module for XDMoD Portal
  * @author Alex Tovar (rvtovar)
  * @date 2025-10-08
- *
+ * @updateDate 2026-04-02
  * Overview:
  * This module adds a user interface to the XDMoD Portal for browsing and downloading
  * custom NAIRR reports. It leverages Ext JS 3.4.x idioms and XDMoD's portal conventions.
@@ -13,6 +13,7 @@
  * - Handles tab activation, tree expansion, and async report loading using Ext JS best practices.
  * - Ensures robust UI masking/unmasking and avoids redundant network loads.
  * - All tab/hash management is keyed by the configured tab ID.
+ * - Viewing reports within tab and downloaded from tbar
  *
  * Usage:
  * - Add this module to the XDMoD Portal config.
@@ -40,6 +41,22 @@ Ext.extend(XDMoD.Module.NairrReports, XDMoD.PortalModule, {
         `/custom_reports/reports?year=${encodeURIComponent(year)}&month=${encodeURIComponent(month)}`,
       );
     }
+    function buildQuery(year, month, extra) {
+      const params = [];
+
+      if (year) params.push("year=" + encodeURIComponent(year));
+      if (month) params.push("month=" + encodeURIComponent(month));
+
+      if (extra) {
+        for (var k in extra) {
+          if (extra[k] != null) {
+            params.push(k + "=" + encodeURIComponent(extra[k]));
+          }
+        }
+      }
+
+      return params.length ? "?" + params.join("&") : "";
+    }
     function formatReportTitle(reportId) {
       const parts = reportId.split("_");
       const params = getHashParams();
@@ -62,13 +79,10 @@ Ext.extend(XDMoD.Module.NairrReports, XDMoD.PortalModule, {
       return `${params.month}, ${params.year} ${formattedTitle}`;
     }
     function triggerReportDownload(reportId, year, month) {
-      const qs = [];
-      if (year) qs.push(`year=${encodeURIComponent(year)}`);
-      if (month) qs.push(`month=${encodeURIComponent(month)}`);
-
-      const url = `${XDMoD.REST.prependPathBase(
-        "/custom_reports/report/",
-      )}${reportId}${qs.length ? "?" + qs.join("&") : ""}`;
+      const url =
+        XDMoD.REST.prependPathBase("/custom_reports/report/") +
+        reportId +
+        buildQuery(year, month);
 
       let iframe = document.getElementById("nairr_report_download_iframe");
 
@@ -82,17 +96,15 @@ Ext.extend(XDMoD.Module.NairrReports, XDMoD.PortalModule, {
       iframe.src = url;
     }
     function showReportPreview(reportId, year, month) {
-      const qs = [];
-      if (year) qs.push(`year=${encodeURIComponent(year)}`);
-      if (month) qs.push(`month=${encodeURIComponent(month)}`);
-      qs.push("view=inline");
-      const url = `${XDMoD.REST.prependPathBase(
-        "/custom_reports/report/",
-      )}${reportId}${qs.length ? "?" + qs.join("&") : ""}`;
+      const url =
+        XDMoD.REST.prependPathBase("/custom_reports/report/") +
+        reportId +
+        buildQuery(year, month, { view: "inline" });
 
       mainArea.getLayout().setActiveItem(previewPanel);
       mainArea.setTitle(formatReportTitle(reportId) + " Preview");
 
+      previewPanel.reportId = reportId;
       previewPanel.body.update(
         '<iframe src="' +
           url +
@@ -109,7 +121,15 @@ Ext.extend(XDMoD.Module.NairrReports, XDMoD.PortalModule, {
         report_id: params.get("report_id"),
       };
     }
-
+    function showMessage(container, msg) {
+      container.body.update(
+        '<div class="no-reports-container">' +
+          '<div class="no-reports-icon">&#9888;</div>' +
+          '<div class="no-reports-title">' +
+          msg +
+          "</div></div>",
+      );
+    }
     function setHashParams(obj) {
       window._tabHashParams[TAB_ID] = obj;
 
@@ -192,7 +212,21 @@ Ext.extend(XDMoD.Module.NairrReports, XDMoD.PortalModule, {
         }
       });
     }
+    function createDownloadButton(getReportIdFn) {
+      return new Ext.Button({
+        text: "Download",
+        iconCls: "btn_download",
+        tooltip: "Download Selected Report",
+        handler: function () {
+          var p = getHashParams();
+          var reportId = getReportIdFn();
 
+          if (!reportId) return;
+
+          triggerReportDownload(reportId, p.year, p.month);
+        },
+      });
+    }
     function loadReportsAsync(year, month, report_id) {
       if (
         lastLoaded.year === year &&
@@ -222,26 +256,15 @@ Ext.extend(XDMoD.Module.NairrReports, XDMoD.PortalModule, {
           reportContainer.body.unmask();
 
           if (!success) {
-            reportContainer.body.update(`
-              <div class="no-reports-container">
-                <div class="no-reports-icon">&#9888;</div>
-                <div class="no-reports-title">
-                  Failed to load reports. Please try again.
-                </div>
-              </div>
-            `);
+            showMessage(
+              reportContainer,
+              "Failed to load reports. Please try again.",
+            );
             return;
           }
 
           if (!records || records.length === 0) {
-            reportContainer.body.update(`
-              <div class="no-reports-container">
-                <div class="no-reports-icon">&#9888;</div>
-                <div class="no-reports-title">
-                  No reports available.
-                </div>
-              </div>
-            `);
+            showMessage(reportContainer, "No reports available.");
             return;
           }
 
@@ -291,14 +314,7 @@ Ext.extend(XDMoD.Module.NairrReports, XDMoD.PortalModule, {
         this.removeAll(true);
 
         if (!records || records.length === 0) {
-          this.body.update(`
-            <div class="no-reports-container">
-              <div class="no-reports-icon">&#9888;</div>
-              <div class="no-reports-title">
-                No reports available.
-              </div>
-            </div>
-          `);
+          showMessage(reportContainer, "No reports available.");
           return;
         }
 
@@ -307,23 +323,13 @@ Ext.extend(XDMoD.Module.NairrReports, XDMoD.PortalModule, {
         Ext.each(records, function (record) {
           const report = record.data;
 
-          var btnDownloadReport = new Ext.Button({
-            text: "Download",
-            iconCls: "btn_download",
-            tooltip: "Download Selected Report",
-            handler: function () {
-              const params = getHashParams();
-
-              triggerReportDownload(report.name, params.year, params.month);
-            },
-          });
           var btnViewReport = new Ext.Button({
             iconCls: "btn_preview",
             text: "Preview",
             tooltip: "See a visual representation of the selected report.",
             handler: function () {
-              const params = getHashParams();
-              showReportPreview(report.name, params.year, params.month);
+              var p = getHashParams();
+              showReportPreview(report.name, p.year, p.month);
             },
           });
           const panel = new Ext.Panel({
@@ -331,7 +337,12 @@ Ext.extend(XDMoD.Module.NairrReports, XDMoD.PortalModule, {
             cls: "custom-report-panel",
 
             tbar: {
-              items: [btnDownloadReport, btnViewReport],
+              items: [
+                createDownloadButton(function () {
+                  return report.name;
+                }),
+                btnViewReport,
+              ],
             },
 
             html: `
@@ -385,14 +396,12 @@ Ext.extend(XDMoD.Module.NairrReports, XDMoD.PortalModule, {
 
     const btnGoBack = new Ext.Button({
       iconCls: "btn_return_to_previous",
-      text: "Go Back",
+      text: "Go Back NAIRR Reports",
       tooltip: "Go back to previous reports",
       handler: function () {
-        const params = getHashParams();
+        var p = getHashParams();
         mainArea.getLayout().setActiveItem(reportContainer);
-        mainArea.setTitle(
-          "NAIRR Reports for " + params.month + " " + params.year,
-        );
+        mainArea.setTitle("NAIRR Reports for " + p.month + " " + p.year);
       },
     });
 
@@ -403,7 +412,13 @@ Ext.extend(XDMoD.Module.NairrReports, XDMoD.PortalModule, {
       autoScroll: false,
       html: "",
       tbar: {
-        items: [btnGoBack],
+        items: [
+          createDownloadButton(function () {
+            return previewPanel.reportId;
+          }),
+          "->",
+          btnGoBack,
+        ],
       },
       listeners: {
         afterrender: function (p) {
