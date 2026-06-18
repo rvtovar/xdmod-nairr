@@ -1,9 +1,7 @@
 {
   "module": "cloudbank",
   "+roles": {
-    "cb": {
-      "display": "CloudBank",
-      "type": "data",
+    "default": {
       "query_descripters": [
         {
           "realm": "CloudBankSpend",
@@ -28,6 +26,10 @@
         {
           "realm": "CloudBankSpend",
           "group_by": "cb_fund"
+        },
+        {
+          "realm": "CloudBankSpend",
+          "group_by": "cb_fund_allocation_type"
         },
         {
           "realm": "CloudBankSpend",
@@ -82,16 +84,16 @@
           "group_by": "cb_field_of_science"
         },
         {
-          "realm": "CloudBankSpend",
-          "group_by": "cb_nairrproject"
-        },
-        {
           "realm": "CloudBankFunds",
           "group_by": "none"
         },
         {
           "realm": "CloudBankFunds",
           "group_by": "cb_funder"
+        },
+        {
+          "realm": "CloudBankFunds",
+          "group_by": "cb_fund_allocation_type"
         },
         {
           "realm": "CloudBankFunds",
@@ -141,8 +143,7 @@
           "realm": "CloudBankFunds",
           "group_by": "cb_nairrproject"
         }
-      ],
-      "summary_charts": []
+      ]
     }
   }
 }
